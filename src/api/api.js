@@ -41,3 +41,14 @@ export const SYSTEM_USER_ADD = `/api/admin_plat/system-user/add`;
 export const SYSTEM_USER_EDIT = `/api/admin_plat/system-user/edit`;
 export const SYSTEM_USER_DEL = `/api/admin_plat/system-user/del`;
 export const SYSTEM_USER_ROLE_TREE = `/api/admin_plat/system-user/get-role-tree`;
+
+
+// monitor
+export const MONITOR_CRON_GET = `/api/admin_plat/monitor-cron/get`;
+export const MONITOR_CRON_ADD = `/api/admin_plat/monitor-cron/add`;
+export const MONITOR_CRON_EDIT = `/api/admin_plat/monitor-cron/edit`;
+export const MONITOR_CRON_DEL = `/api/admin_plat/monitor-cron/del`;
+export const MONITOR_CRON_AVAIBLE = `/api/admin_plat/monitor-cron/get-avaible`;
+export const MONITOR_CRON_START = `/api/admin_plat/monitor-cron/start`;
+export const MONITOR_CRON_STOP = `/api/admin_plat/monitor-cron/stop`;
+export const MONITOR_CRON_CHANGE_STATUS = `/api/admin_plat/monitor-cron/change-status`;

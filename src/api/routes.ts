@@ -17,6 +17,8 @@ export const getAsyncRoutes = () => {
       if (!item.children || !item.children.length) {
         delete item.name;
         delete item.children;
+        if (item.meta && item.meta.showParent )
+          delete item.meta.showParent;
         return item;
       }
       item.meta.roles = item.meta && item.meta.roles || [];
@@ -62,6 +64,7 @@ function remakeRoutes(oldRoutes: Array<any>, parentRoute = null) {
         roles: item.roles || [],
         // rank: weight<=0 ? null : weight*100,
         showLink: item.showLink,
+        showParent: item.showParent,
         icon: item.icon,
         auths: item.auths || (item.path && [item.path.replace(/\//g, ':')]) || []
       },

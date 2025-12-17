@@ -214,4 +214,10 @@ function doGetCatpcha(){
 :deep(.el-input-group__append, .el-input-group__prepend) {
   padding: 0;
 }
+
+.login-form{
+  h2.outline-none {
+    color: var(--el-color-primary);
+  }
+}
 </style>
