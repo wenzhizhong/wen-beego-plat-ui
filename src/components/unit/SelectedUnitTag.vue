@@ -104,6 +104,7 @@ function selectUserUnitCallback(unitInfo) {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          color: var(--el-color-primary);
         }
         .goto-change-unit{
           font-size: 14px!important;
