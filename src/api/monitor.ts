@@ -8,6 +8,7 @@ import {
   MONITOR_CRON_START, 
   MONITOR_CRON_STOP,
   MONITOR_CRON_CHANGE_STATUS,
+  MONITOR_CRON_LOG_GET,
 } from "./api.js";
 type Result = {
   code : number;
@@ -46,7 +47,7 @@ export const delCron = (data?: object) => {
   return http.request<Result>("post", MONITOR_CRON_DEL, { data });
 };
 // 获取定时任务可用状态
-export const avaibleCron = (params?: object) => {
+export const avaibleCron = async (params?: object) => {
   return http.request<Result>("get", MONITOR_CRON_AVAIBLE, { params });
 };
 // 开/关定时任务
@@ -63,4 +64,10 @@ export const startCron = (data?: object) => {
 // 关闭定时任务
 export const stopCron = (data?: object) => {
   return http.request<Result>("post", MONITOR_CRON_STOP, { data });
+};
+
+
+// 获取定时任务日志列表
+export const getCronLogList = (params?: object) => {
+  return http.request<ResultTable>("get", MONITOR_CRON_LOG_GET, { params });
 };

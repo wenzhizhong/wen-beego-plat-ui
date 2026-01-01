@@ -239,3 +239,10 @@ export function getConstellation(date) {
   
   return '摩羯座';
 }
+// list 转map
+export function listToMap(list, key, valueKeyName='') { 
+  return list.reduce((acc, item) => {
+    acc[item[key]] = valueKeyName? item[valueKeyName]  : item;
+    return acc;
+  }, {});
+}

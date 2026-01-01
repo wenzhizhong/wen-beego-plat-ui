@@ -52,3 +52,4 @@ export const MONITOR_CRON_AVAIBLE = `/api/admin_plat/monitor-cron/get-avaible`;
 export const MONITOR_CRON_START = `/api/admin_plat/monitor-cron/start`;
 export const MONITOR_CRON_STOP = `/api/admin_plat/monitor-cron/stop`;
 export const MONITOR_CRON_CHANGE_STATUS = `/api/admin_plat/monitor-cron/change-status`;
+export const MONITOR_CRON_LOG_GET = `/api/admin_plat/monitor-cron-log/get`;

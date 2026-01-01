@@ -159,6 +159,7 @@ export function useRole(treeRef: Ref) {
   function handleDelete(row) {
     delRole({ id: row.id }).then((res) => {
       if (res.code === 200) { 
+        onSearchRoleMenu()
         onSearch();
         message(`您删除了角色【${transformI18n(row.role_name)}】`, {
           type: "success"
@@ -202,10 +203,15 @@ export function useRole(treeRef: Ref) {
       loading.value = false;
     }, 500);
   }
+  async function onSearchRoleMenu(){
+    const { default_unit_id: tmpDefaultUnitId } = useUserStoreHook();
+    await doGetRoleMenu(tmpDefaultUnitId);
+  }
 
   const resetForm = formEl => {
     if (!formEl) return;
     formEl.resetFields();
+    onSearchRoleMenu()
     onSearch();
   };
 
@@ -453,8 +459,9 @@ export function useRole(treeRef: Ref) {
   }
 
   onMounted(async () => {
-    const { default_unit_id: tmpDefaultUnitId } = useUserStoreHook();
-    await doGetRoleMenu(tmpDefaultUnitId);
+    // const { default_unit_id: tmpDefaultUnitId } = useUserStoreHook();
+    // await doGetRoleMenu(tmpDefaultUnitId);
+    await onSearchRoleMenu()
     onSearch();
   });
 
