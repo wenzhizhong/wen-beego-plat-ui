@@ -1,16 +1,19 @@
 import editForm from "../form.vue";
 import { handleTree } from "@/utils/tree";
 import { message } from "@/utils/message";
-import { getMenuList } from "@/api/system";
+import { getPlatMenuList as getMenuList, addMenuPlat as addMenu, editMenuPlat as editMenu, delMenuPlat as delMenu} from "@/api/system";
 // import { transformI18n } from "@/plugins/i18n";
 let transformI18n = (label: string) => label; // 不需要i18n,临时解决i18n报错
 import { addDialog } from "@/components/ReDialog";
 import { reactive, ref, onMounted, h } from "vue";
-import type { FormItemProps } from "../utils/types";
+import type { FormItemProps } from "./types";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import { cloneDeep, isAllEmpty, deviceDetection } from "@pureadmin/utils";
+import { ElMessageBox } from "element-plus";
+// import {useDbModelParamsStoreHook } from "@/store/modules/globalParams";
 
 export function useMenu() {
+  // const { unit_menu_type_map } = useDbModelParamsStoreHook();
   const form = reactive({
     title: ""
   });
@@ -29,6 +32,8 @@ export function useMenu() {
         return text ? "外链" : "danger";
       case 3:
         return text ? "按钮" : "info";
+      case 4:
+        return text ? "额外" : "info";
     }
   };
 
@@ -108,7 +113,7 @@ export function useMenu() {
   async function onSearch() {
     loading.value = true;
     const { data } = await getMenuList(); // 这里是返回一维数组结构，前端自行处理成树结构，返回格式要求：唯一id加父节点parentId，parentId取父节点id
-    let newData = data;
+    let newData = data?.list || [];
     if (!isAllEmpty(form.title)) {
       // 前端搜索菜单名称
       newData = newData.filter(item =>
@@ -137,6 +142,8 @@ export function useMenu() {
       title: `${title}菜单`,
       props: {
         formInline: {
+          id: row?.id ?? "",
+          unitId: row?.unitId ?? "",
           menuType: row?.menuType ?? 0,
           higherMenuOptions: formatHigherMenuOptions(cloneDeep(dataList.value)),
           parentId: row?.parentId ?? 0,
@@ -158,7 +165,8 @@ export function useMenu() {
           hiddenTag: row?.hiddenTag ?? false,
           fixedTag: row?.fixedTag ?? false,
           showLink: row?.showLink ?? true,
-          showParent: row?.showParent ?? false
+          showParent: row?.showParent ?? false,
+          asyncToAll:"",
         }
       },
       width: "45%",
@@ -171,26 +179,60 @@ export function useMenu() {
         const FormRef = formRef.value.getRef();
         const curData = options.props.formInline as FormItemProps;
         function chores() {
-          message(
-            `您${title}了菜单【${transformI18n(curData.title)}】`,
-            {
-              type: "success"
-            }
-          );
+          // message(
+          //   `您${title}了菜单【${transformI18n(curData.title)}】`,
+          //   {
+          //     type: "success"
+          //   }
+          // );
           done(); // 关闭弹框
           onSearch(); // 刷新表格数据
         }
         FormRef.validate(valid => {
           if (valid) {
             console.log("curData", curData);
-            // 表单规则校验通过
-            if (title === "新增") {
-              // 实际开发先调用新增接口，再进行下面操作
-              chores();
-            } else {
-              // 实际开发先调用修改接口，再进行下面操作
-              chores();
-            }
+            
+            ElMessageBox({
+              title: "提示",
+              message: "是否保存数据？",
+              type: "warning",
+              confirmButtonText: "确定",
+              cancelButtonText: "取消",
+              showCancelButton: true,
+            }).then(async () => { 
+              // 表单规则校验通过
+              if (title === "新增") {
+                // 实际开发先调用新增接口，再进行下面操作
+                // chores();
+                addMenu(curData).then(res => { 
+                  if (res.code === 200) {
+                    message(`新增成功`, {
+                      type: "success"
+                    });
+                    chores();
+                  } else {
+                    message(res.message || `新增失败`, {
+                      type: "error"
+                    })
+                  }
+                })
+              } else {
+                // 实际开发先调用修改接口，再进行下面操作
+                // chores();
+                editMenu(curData).then(res => { 
+                  if (res.code === 200) {
+                    message(`修改成功`, {
+                      type: "success"
+                    })
+                    chores();
+                  }else {
+                    message(res.message || `修改失败`, {
+                      type: "error"
+                    })
+                  }
+                })
+              }
+            })
           }
         });
       }
@@ -198,10 +240,20 @@ export function useMenu() {
   }
 
   function handleDelete(row) {
-    message(`您删除了菜单【${transformI18n(row.title)}】`, {
-      type: "success"
+    // message(`您删除了菜单【${transformI18n(row.title)}】`, {
+    //   type: "success"
+    // });
+    // onSearch();
+    delMenu({ id: row.id }).then((res) => { 
+      if (res.code === 200) { 
+        message(`您删除了菜单【${transformI18n(row.title)}】`, {
+          type: "success"
+        });
+        onSearch();
+      }else {
+        message(res.message || "删除失败" , { type: "error" });
+      }
     });
-    onSearch();
   }
 
   onMounted(() => {

@@ -42,6 +42,17 @@ export const SYSTEM_USER_EDIT = `/api/admin_plat/system-user/edit`;
 export const SYSTEM_USER_DEL = `/api/admin_plat/system-user/del`;
 export const SYSTEM_USER_ROLE_TREE = `/api/admin_plat/system-user/get-role-tree`;
 
+export const SYSTEM_MENU_PLAT_GET = `/api/admin_plat/system-menu/get-plat`;
+export const SYSTEM_MENU_PLAT_ADD = "/api/admin_plat/system-menu/add-plat"
+export const SYSTEM_MENU_PLAT_EDIT = "/api/admin_plat/system-menu/edit-plat"
+export const SYSTEM_MENU_PLAT_DEL = "/api/admin_plat/system-menu/del-plat"
+export const SYSTEM_MENU_MCHNT_GET = `/api/admin_plat/system-menu/get-mchnt`;
+export const SYSTEM_MENU_MCHNT_ADD = "/api//admin_plat/system-menu/add-mchnt"
+export const SYSTEM_MENU_MCHNT_EDIT = "/api//admin_plat/system-menu/edit-mchnt"
+export const SYSTEM_MENU_MCHNT_DEL = "/api//admin_plat/system-menu/del-mchnt"
+
+
+
 
 // monitor
 export const MONITOR_CRON_GET = `/api/admin_plat/monitor-cron/get`;

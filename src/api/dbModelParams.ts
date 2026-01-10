@@ -10,6 +10,7 @@ export interface dbModelParamItf {
   unit_gender_map : Object
   unit_card_type_map : Object
   unit_user_source_map : Object
+  unit_menu_type_map : Object
 }
 
 export interface dbModelParamResult{

@@ -13,7 +13,7 @@ import Refresh from "~icons/ep/refresh";
 import AddFill from "~icons/ri/add-circle-line";
 
 defineOptions({
-  name: "SystemMenu"
+  name: "SystemMenuPlat"
 });
 
 const formRef = ref();
@@ -80,6 +80,7 @@ function onFullscreen() {
           type="primary"
           :icon="useRenderIcon(AddFill)"
           @click="openDialog()"
+          :disabled="!hasPerms(['admin_plat:system-menu:add-plat'])"
         >
           新增菜单
         </el-button>
@@ -111,6 +112,7 @@ function onFullscreen() {
               :size="size"
               :icon="useRenderIcon(EditPen)"
               @click="openDialog('修改', row)"
+              :disabled="!hasPerms(['admin_plat:system-menu:edit-plat'])"
             >
               修改
             </el-button>
@@ -122,6 +124,7 @@ function onFullscreen() {
               :size="size"
               :icon="useRenderIcon(AddFill)"
               @click="openDialog('新增', { parentId: row.id } as any)"
+              :disabled="!hasPerms(['admin_plat:system-menu:add-plat'])"
             >
               新增
             </el-button>
@@ -140,6 +143,7 @@ function onFullscreen() {
                   type="danger"
                   :size="size"
                   :icon="useRenderIcon(Delete)"
+                  :disabled="!hasPerms(['admin_plat:system-menu:del-plat'])"
                 >
                   删除
                 </el-button>

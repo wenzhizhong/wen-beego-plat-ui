@@ -5,9 +5,10 @@ import { formRules } from "./utils/rule";
 import { FormProps } from "./utils/types";
 // import { transformI18n } from "@/plugins/i18n";
 let transformI18n = (label: string) => label; // 不需要i18n,临时解决i18n报错
-import { IconSelect } from "@/components/ReIcon";
+import { IconSelect } from "@/components/ReIconV2";
 import Segmented from "@/components/ReSegmented";
 import ReAnimateSelector from "@/components/ReAnimateSelector";
+import SelectUserUnitCascader from "@/components/unit/SelectUserUnitCascader.vue";
 import {
   menuTypeOptions,
   showLinkOptions,
@@ -20,6 +21,8 @@ import {
 
 const props = withDefaults(defineProps<FormProps>(), {
   formInline: () => ({
+    id: "",
+    unitId: "",
     menuType: 0,
     higherMenuOptions: [],
     parentId: 0,
@@ -41,7 +44,8 @@ const props = withDefaults(defineProps<FormProps>(), {
     hiddenTag: false,
     fixedTag: false,
     showLink: true,
-    showParent: false
+    showParent: false,
+    asyncToAll: "",
   })
 });
 
@@ -50,6 +54,13 @@ const newFormInline = ref(props.formInline);
 
 function getRef() {
   return ruleFormRef.value;
+}
+
+function handelSelectUserUnit(e){
+  newFormInline.value.unitId = ""
+  if (e && e[0]){
+    newFormInline.value.unitId =  e[e.length-1]
+  }
 }
 
 defineExpose({ getRef });
@@ -62,6 +73,23 @@ defineExpose({ getRef });
     :rules="formRules"
     label-width="82px"
   >
+    <el-row :gutter="30">
+      <re-col>
+        <el-form-item label="组织单位"  prop="unitId">
+          <div style="display: flex; width: 100%; ">
+            <SelectUserUnitCascader :changed="handelSelectUserUnit" :modelValue="newFormInline.unitId"  />
+          </div>
+        </el-form-item>
+      </re-col>
+      <re-col>
+        <el-form-item label="同步数据" prop="asyncToAll">
+          <el-radio-group v-model="newFormInline.asyncToAll">
+            <el-radio value="1" border>同步到所有组织单位</el-radio>
+          </el-radio-group>
+        </el-form-item>
+      </re-col>
+    </el-row>
+
     <el-row :gutter="30">
       <re-col>
         <el-form-item label="菜单类型">

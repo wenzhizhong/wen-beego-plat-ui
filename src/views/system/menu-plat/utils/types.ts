@@ -1,4 +1,6 @@
 interface FormItemProps {
+  id : string;
+  unitId: string;
   /** 菜单类型（0代表菜单、1代表iframe、2代表外链、3代表按钮）*/
   menuType: number;
   higherMenuOptions: Record<string, unknown>[];
@@ -22,6 +24,7 @@ interface FormItemProps {
   fixedTag: boolean;
   showLink: boolean;
   showParent: boolean;
+  asyncToAll: ""
 }
 interface FormProps {
   formInline: FormItemProps;

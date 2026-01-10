@@ -21,6 +21,7 @@ export const useDbModelParamsStore = defineStore({
     unit_gender_map: storageSession().getItem<dbModelParamItf>(dbModelParamKey)?.unit_gender_map ?? {},
     unit_card_type_map: storageSession().getItem<dbModelParamItf>(dbModelParamKey)?.unit_card_type_map ?? {},
     unit_user_source_map: storageSession().getItem<dbModelParamItf>(dbModelParamKey)?.unit_user_source_map ?? {},
+    unit_menu_type_map : storageSession().getItem<dbModelParamItf>(dbModelParamKey)?.unit_menu_type_map ?? {},
 
   }),
   actions: {

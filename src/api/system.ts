@@ -21,6 +21,14 @@ import { SYSTEM_UNIT_LIST,
   SYSTEM_USER_EDIT, 
   SYSTEM_USER_DEL, 
   SYSTEM_USER_ROLE_TREE,
+  SYSTEM_MENU_PLAT_GET,
+  SYSTEM_MENU_PLAT_ADD ,
+  SYSTEM_MENU_PLAT_EDIT ,
+  SYSTEM_MENU_PLAT_DEL ,
+  SYSTEM_MENU_MCHNT_GET, 
+  SYSTEM_MENU_MCHNT_ADD ,
+  SYSTEM_MENU_MCHNT_EDIT,
+  SYSTEM_MENU_MCHNT_DEL ,
 } from "./api"
 
 type Result = {
@@ -111,9 +119,65 @@ export const editRole = (data?: object) => {
   return http.request<Result>("post", SYSTEM_ROLE_EDIT, { data });
 };
 
-/** 系统管理-菜单管理列表 */
-export const getMenuList = (data?: object) => {
-  return http.request<Result>("post", "/menu", { data });
+
+/** 系统管理-菜单管理列表-平台 */
+export const getPlatMenuList = (params?: object) => {
+  return http.request<Result>("get", SYSTEM_MENU_PLAT_GET, { params });
+};
+
+
+/**
+ * 添加菜单
+ * @param data 
+ * @returns 
+ */
+export const addMenuPlat = (data?: object) => {
+  return http.request<Result>("post", SYSTEM_MENU_PLAT_ADD, { data });
+};
+/**
+ *  修改菜单
+ * @param data 
+ * @returns 
+ */
+export const editMenuPlat = (data?: object) => {
+  return http.request<Result>("post", SYSTEM_MENU_PLAT_EDIT, { data });
+};
+/**
+ *  删除菜单
+ * @param data 
+ * @returns 
+ */
+export const delMenuPlat = (data?: object) => {
+  return http.request<Result>("post", SYSTEM_MENU_PLAT_DEL, { data });
+};
+
+/** 系统管理-菜单管理列表-商户 */
+export const getMchntMenuList = (params?: object) => {
+  return http.request<Result>("get", SYSTEM_MENU_MCHNT_GET, { params });
+};
+/**
+ *  添加商户菜单
+ * @param data 
+ * @returns 
+ */
+export const addMchntMenu = (data?: object) => {
+  return http.request<Result>("post", SYSTEM_MENU_MCHNT_ADD, { data });
+};
+/**
+ *  修改商户菜单
+ * @param data 
+ * @returns 
+ */
+export const editMchntMenu = (data?: object) => {
+  return http.request<Result>("post", SYSTEM_MENU_MCHNT_EDIT, { data });
+};
+/**
+ *  删除商户菜单
+ * @param data 
+ * @returns 
+ */
+export const delMchntMenu = (data?: object) => {
+  return http.request<Result>("post", SYSTEM_MENU_MCHNT_DEL, { data });
 };
 
 /** 系统管理-部门管理列表 */
