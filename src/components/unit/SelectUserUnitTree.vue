@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { shallowRef, reactive, ref, onMounted} from "vue";
 import { getUserUnit } from "@/api/unit";
+import { getMenuMchntUnitTree } from "@/api/system";
 import { handleTree } from "@/utils/tree";
 import tree from "../tree/tree.vue"
 
@@ -10,12 +11,16 @@ import {
 import { nextTick } from "vue";
 
 const props = defineProps({
+  apiType:{
+    type: String,
+    default: "" // page-system-menu
+  },
   onTreeSelect:{
     type: Function,
     required: true,
   },
   defaultCheckedKeys: {
-    type: Array as () => number[],
+    type: Array as () => any[],
     default: () => []
   },
   currentNodeKey: String,
@@ -42,8 +47,7 @@ defineOptions({
 /** 获取组织列表 */
 function getUserUnit_() { 
   state.loading = true;
-  
-  getUserUnit({data:{}}).then((res) => {
+  let callback = (res) => {
     state.treeLoading = true
     let tmpData =  res && res.data && res.data.list || [];
     let tmpUnitList= [];
@@ -71,7 +75,16 @@ function getUserUnit_() {
     
     state.loading = false;
     state.treeLoading = false
-  });
+  }
+  
+  switch (props.apiType) {
+    case "page-system-menu":
+      getMenuMchntUnitTree({}).then(callback);
+      break;
+    default:
+      getUserUnit({data:{}}).then(callback);
+      break;
+  }
 }
 
 function onTreeSelect({ id, selected }) {

@@ -77,8 +77,9 @@ defineExpose({ getRef });
       <re-col>
         <el-form-item label="组织单位"  prop="unitId">
           <div style="display: flex; width: 100%; ">
-            <SelectUserUnitCascader :changed="handelSelectUserUnit" :modelValue="newFormInline.unitId"  />
+            <SelectUserUnitCascader :apiType="'page-system-menu'" :changed="handelSelectUserUnit" :modelValue="newFormInline.unitId"  />
           </div>
+      
         </el-form-item>
       </re-col>
       <re-col>

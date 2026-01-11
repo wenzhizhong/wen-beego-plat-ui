@@ -29,6 +29,7 @@ import { SYSTEM_UNIT_LIST,
   SYSTEM_MENU_MCHNT_ADD ,
   SYSTEM_MENU_MCHNT_EDIT,
   SYSTEM_MENU_MCHNT_DEL ,
+  SYSTEM_MENU_MCHNT_UNIT_TREE,
 } from "./api"
 
 type Result = {
@@ -160,7 +161,7 @@ export const getMchntMenuList = (params?: object) => {
  * @param data 
  * @returns 
  */
-export const addMchntMenu = (data?: object) => {
+export const addMenuMchnt = (data?: object) => {
   return http.request<Result>("post", SYSTEM_MENU_MCHNT_ADD, { data });
 };
 /**
@@ -168,7 +169,7 @@ export const addMchntMenu = (data?: object) => {
  * @param data 
  * @returns 
  */
-export const editMchntMenu = (data?: object) => {
+export const editMenuMchnt = (data?: object) => {
   return http.request<Result>("post", SYSTEM_MENU_MCHNT_EDIT, { data });
 };
 /**
@@ -176,8 +177,16 @@ export const editMchntMenu = (data?: object) => {
  * @param data 
  * @returns 
  */
-export const delMchntMenu = (data?: object) => {
+export const delMenuMchnt = (data?: object) => {
   return http.request<Result>("post", SYSTEM_MENU_MCHNT_DEL, { data });
+};
+/**
+ * 获取商户菜单-商户组织树
+ * @param params 
+ * @returns 
+ */
+export const getMenuMchntUnitTree = (params?: object) => {
+  return http.request<Result>("get", SYSTEM_MENU_MCHNT_UNIT_TREE, { params });
 };
 
 /** 系统管理-部门管理列表 */

@@ -1,7 +1,7 @@
 import editForm from "../form.vue";
 import { handleTree } from "@/utils/tree";
 import { message } from "@/utils/message";
-import { getPlatMenuList as getMenuList, addMenuPlat as addMenu, editMenuPlat as editMenu, delMenuPlat as delMenu} from "@/api/system";
+import { getMchntMenuList as getMenuList, addMenuMchnt as addMenu, editMenuMchnt as editMenu, delMenuMchnt as delMenu} from "@/api/system";
 // import { transformI18n } from "@/plugins/i18n";
 let transformI18n = (label: string) => label; // 不需要i18n,临时解决i18n报错
 import { addDialog } from "@/components/ReDialog";

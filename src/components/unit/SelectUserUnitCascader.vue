@@ -4,9 +4,14 @@ import { getUserUnit } from "@/api/unit";
 import { ArrowRightBold } from "@element-plus/icons-vue";
 import { handleTree } from "@/utils/tree";
 import { getVarType } from "@/utils/util.js"
+import { getMenuMchntUnitTree } from "@/api/system";
 
 
 const props = defineProps({
+  apiType:{
+    type: String,
+    default: "" // page-system-menu
+  },
   changed:{
     type: Function,
     required: true
@@ -58,8 +63,7 @@ defineOptions({
 /** 获取组织列表 */
 function getUserUnit_() { 
   state.loading = true;
-  
-  getUserUnit({data:{}}).then((res) => {
+  const callback = (res) => {
     let tmpData =  res && res.data && res.data.list || [];
     let tmpUnitList= [];
     tmpData.forEach(item => {
@@ -82,7 +86,16 @@ function getUserUnit_() {
     unitList.value = treeData
     state.loading = false;
     state.pid = getModelValueFromTree(treeData, props.modelValue)
-  });
+  };
+
+  switch (props.apiType) {
+    case "page-system-menu":
+      getMenuMchntUnitTree({}).then(callback);
+      break;
+    default :
+      getUserUnit({data:{}}).then(callback);
+      break;
+  }
 }
 getUserUnit_();
 

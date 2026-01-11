@@ -47,9 +47,10 @@ export const SYSTEM_MENU_PLAT_ADD = "/api/admin_plat/system-menu/add-plat"
 export const SYSTEM_MENU_PLAT_EDIT = "/api/admin_plat/system-menu/edit-plat"
 export const SYSTEM_MENU_PLAT_DEL = "/api/admin_plat/system-menu/del-plat"
 export const SYSTEM_MENU_MCHNT_GET = `/api/admin_plat/system-menu/get-mchnt`;
-export const SYSTEM_MENU_MCHNT_ADD = "/api//admin_plat/system-menu/add-mchnt"
-export const SYSTEM_MENU_MCHNT_EDIT = "/api//admin_plat/system-menu/edit-mchnt"
-export const SYSTEM_MENU_MCHNT_DEL = "/api//admin_plat/system-menu/del-mchnt"
+export const SYSTEM_MENU_MCHNT_ADD = "/api/admin_plat/system-menu/add-mchnt"
+export const SYSTEM_MENU_MCHNT_EDIT = "/api/admin_plat/system-menu/edit-mchnt"
+export const SYSTEM_MENU_MCHNT_DEL = "/api/admin_plat/system-menu/del-mchnt"
+export const SYSTEM_MENU_MCHNT_UNIT_TREE = "/api/admin_plat/system-menu/mchnt-unit-list"
 
 
 
