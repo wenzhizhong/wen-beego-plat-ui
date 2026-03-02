@@ -40,6 +40,7 @@ function onFullscreen() {
   <div :class="['flex']">
     <SelectUserUnitTree
       ref="treeRef"
+      :apiType="'page-system-menu'"
       @tree-select="onTreeSelect"
     />
     <div class="main" style="width: 100%;" >

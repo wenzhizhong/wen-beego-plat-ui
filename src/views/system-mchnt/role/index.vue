@@ -112,6 +112,7 @@ onMounted(() => {
   <div :class="['flex', deviceDetection() ? 'flex-wrap' : '']">
     <SelectUserUnitTree
       ref="treeRef"
+      :apiType="'page-system-menu'"
       @tree-select="onTreeSelect"
       :defaultCheckedKeys="defaultCheckedKeys"
       :currentNodeKey="currentNodeKey"
