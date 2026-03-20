@@ -59,6 +59,9 @@ importers:
       enquire.js:
         specifier: ^2.1.6
         version: 2.1.6
+      jose:
+        specifier: ^6.2.1
+        version: 6.2.1
       js-cookie:
         specifier: ^3.0.5
         version: 3.0.5
@@ -2273,6 +2276,9 @@ packages:
   jiti@2.4.1:
     resolution: {integrity: sha512-yPBThwecp1wS9DmoA4x4KR2h3QoslacnDR8ypuFM962kI4/456Iy1oHx2RAgh4jfZNdn0bctsdadceiBUgpU1g==}
     hasBin: true
+
+  jose@6.2.1:
+    resolution: {integrity: sha512-jUaKr1yrbfaImV7R2TN/b3IcZzsw38/chqMpo2XJ7i2F8AfM/lA4G1goC3JVEwg0H7UldTmSt3P68nt31W7/mw==, tarball: https://registry.npmmirror.com/jose/-/jose-6.2.1.tgz}
 
   js-cookie@3.0.5:
     resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
@@ -5907,6 +5913,8 @@ snapshots:
 
   jiti@2.4.1:
     optional: true
+
+  jose@6.2.1: {}
 
   js-cookie@3.0.5: {}
 

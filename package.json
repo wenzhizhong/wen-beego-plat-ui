@@ -65,6 +65,7 @@
     "echarts": "^5.5.1",
     "element-plus": "2.11.7",
     "enquire.js": "^2.1.6",
+    "jose": "^6.2.1",
     "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
     "mitt": "^3.0.1",

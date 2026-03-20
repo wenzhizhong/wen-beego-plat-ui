@@ -13,8 +13,17 @@ import { stringify } from "qs";
 import NProgress from "../progress";
 import { getToken, formatToken, DataInfo, getWhiteApiList} from "@/utils/auth";
 import { useUserStoreHook } from "@/store/modules/user";
-import {ElMessageBox } from "element-plus";
+import { ElMessageBox } from "element-plus";
+import { sigAndEnc } from "@/utils/jose/jws";
 
+let tmpMethodMap = {
+  "post": true,
+  "put": true,
+  "delete": true,
+  "patch": true,
+}
+let tmpHeaderSigKey =  JSON.parse(window.atob('WyJTIiwiaSIsICJnIiwgIm4iLCAiYSIsICJ0IiwgInUiLCAiciIsICJlIl0='))
+let tmpBodyKey =  JSON.parse(window.atob('WyJlIiwibiIsImMiLCAiciIsICJ5IiwicCIsICJ0IiwgImUiLCJkIiwgIkQiLCAiYSIsICJ0IiwiYSJd'))
 
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {
@@ -65,6 +74,19 @@ class PureHttp {
       async (config: PureHttpRequestConfig): Promise<any> => {
         // 开启进度条动画
         NProgress.start();
+        if ( config?.method && tmpMethodMap[config.method.toLowerCase()] && 
+          config?.data && Object.keys(config.data).length > 0 &&
+          config?.headers && config.headers['Content-Type'].indexOf("application/json") > -1
+        ){
+          await sigAndEnc(config.data).then((res :object) => {
+            let tmpData = {}
+            tmpData[tmpBodyKey.join('')] = res["e"]
+
+            config.data = tmpData
+            config.headers[tmpHeaderSigKey.join('')] = res["s"]
+          })
+        }
+
         // 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
         if (typeof config.beforeRequestCallback === "function") {
           config.beforeRequestCallback(config);
