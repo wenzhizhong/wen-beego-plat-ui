@@ -65,3 +65,7 @@ export const MONITOR_CRON_START = `/api/admin_plat/monitor-cron/start`;
 export const MONITOR_CRON_STOP = `/api/admin_plat/monitor-cron/stop`;
 export const MONITOR_CRON_CHANGE_STATUS = `/api/admin_plat/monitor-cron/change-status`;
 export const MONITOR_CRON_LOG_GET = `/api/admin_plat/monitor-cron-log/get`;
+
+// queue-dlq
+export const QUEUE_DLQ_GET = `/api/admin_plat/monitor-queue-dlq/get`;
+export const QUEUE_DLQ_REQUEUE = `/api/admin_plat/monitor-queue-dlq/requeue`;
