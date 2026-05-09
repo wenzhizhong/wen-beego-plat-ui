@@ -40,25 +40,25 @@ export const multipleTabsKey = "multiple-tabs";
 export function getWhiteApiList(){
   return ["/refresh-token", "/login"];
 }
+// token过期刷新
+export function doRefreshToken(data) { 
+  return new Promise((resolve, reject)  => {
+    useUserStoreHook()
+      .handRefreshToken({ refreshToken: data.refreshToken, accessToken: data.accessToken })
+      .then(res => {
+        resolve(res && res?.code == 200 && res.data.userInfo);
+      }).catch(err => {
+        console.error(err);
+        reject(err)
+      })
+      .finally(() => {
+        window['isRefreshing'] = false;
+      });
+  });
+}
 
 /** 获取`token` */
 export async function getToken() {
-  // token过期刷新
-  function doRefreshToken(data) { 
-    return new Promise((resolve, reject)  => {
-      useUserStoreHook()
-        .handRefreshToken({ refreshToken: data.refreshToken, accessToken: data.accessToken })
-        .then(res => {
-          resolve(res && res?.code == 200 && res.data.userInfo);
-        }).catch(err => {
-          console.error(err);
-          reject(err)
-        })
-        .finally(() => {
-          window['isRefreshing'] = false;
-        });
-    });
-  }
 
   // 此处与`tokenKey`相同，此写法解决初始化时`Cookies`中不存在`tokenKey`报错
   let cookieData = Cookies.get(tokenKey)

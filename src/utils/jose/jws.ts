@@ -74,6 +74,9 @@ function serializeForPayload(data: JsonValue): string {
     const keys = Object.keys(data).sort(); // ASCII 排序
     const parts: string[] = [];
     for (const key of keys) {
+      if (data[key] === undefined) {
+        continue;
+      }
       parts.push(key + serializeForPayload(data[key]));
     }
     return parts.join('');

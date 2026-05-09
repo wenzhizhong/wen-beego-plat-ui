@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { getConfig } from "@/config";
 import { useLayout } from "./useLayout";
-import { removeToken, asyncRoutesKey } from "@/utils/auth";
+import { doRefreshToken, removeToken, asyncRoutesKey, tokenKey, DataInfo } from "@/utils/auth";
 import { routerArrays } from "@/layout/types";
 import { router, resetRouter } from "@/router";
 import type { themeColorsType } from "../types";
@@ -9,6 +9,7 @@ import { useAppStoreHook } from "@/store/modules/app";
 import { useEpThemeStoreHook } from "@/store/modules/epTheme";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 import { darken, lighten, useGlobal, storageLocal, storageSession } from "@pureadmin/utils";
+import Cookies from "js-cookie";
 
 export function useDataThemeChange() {
   const { layoutTheme, layout } = useLayout();
@@ -123,7 +124,10 @@ export function useDataThemeChange() {
     resetRouter();
   }
 
-  function onClearRouter(){
+  async function onClearRouter(){ 
+    let cookieData = Cookies.get(tokenKey) ? JSON.parse(Cookies.get(tokenKey)) : null;
+    let data = cookieData? cookieData as DataInfo : null;
+    await doRefreshToken(data)
     storageSession().removeItem(asyncRoutesKey);
     window.location.reload();
   }

@@ -89,6 +89,19 @@ onBeforeUnmount(() => {
         >
           清空缓存
         </el-button>
+        <el-button
+          v-tippy="{
+            content: '清空路由缓存并刷新',
+            placement: 'left-start',
+            zIndex: 41000
+          }"
+          type="danger"
+          text
+          bg
+          @click="onClearRouter"
+        >
+          刷新路由
+        </el-button>
       </div>
     </div>
   </div>
