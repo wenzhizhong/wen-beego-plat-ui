@@ -69,3 +69,13 @@ export const MONITOR_CRON_LOG_GET = `/api/admin_plat/monitor-cron-log/get`;
 // queue-dlq
 export const QUEUE_DLQ_GET = `/api/admin_plat/monitor-queue-dlq/get`;
 export const QUEUE_DLQ_REQUEUE = `/api/admin_plat/monitor-queue-dlq/requeue`;
+
+// generate-code
+export const GENERATE_CODE_LIST = `/api/admin_plat/system-tools/generate-code/list`;
+export const GENERATE_CODE_DB_TABLES = `/api/admin_plat/system-tools/generate-code/get-db-tables`;
+export const GENERATE_CODE_DB_TABLE_DETAIL = `/api/admin_plat/system-tools/generate-code/get-db-table-detail`;
+export const GENERATE_CODE_SAVE = `/api/admin_plat/system-tools/generate-code/save`;
+export const GENERATE_CODE_DEL = `/api/admin_plat/system-tools/generate-code/del`;
+export const GENERATE_CODE_GEN_PARAMS = `/api/admin_plat/system-tools/generate-code/get-gen-params`;
+export const GENERATE_CODE_RUN = `/api/admin_plat/system-tools/generate-code/run`;
+export const GENERATE_CODE_DOWNLOAD = `/api/admin_plat/system-tools/generate-code/download`;

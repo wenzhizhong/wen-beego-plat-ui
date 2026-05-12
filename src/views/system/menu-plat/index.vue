@@ -124,7 +124,7 @@ function onFullscreen() {
                 修改
               </el-button>
               <el-button
-                v-show="row.menuType !== 3"
+                v-show="![3, 4].includes(row.menuType)"
                 class="reset-margin"
                 link
                 type="primary"
