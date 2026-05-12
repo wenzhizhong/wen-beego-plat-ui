@@ -16,7 +16,11 @@
       </el-form-item>
 
       <el-form-item label="应用模块：">
-        <el-input v-model="form.appModule" placeholder="如：admin_plat" />
+        <el-select v-model="form.appModules" multiple placeholder="请选择应用模块" style="width: 100%">
+          <el-option label="admin_plat (平台端)" value="admin_plat" />
+          <el-option label="admin_mchnt (商户端)" value="admin_mchnt" />
+          <el-option label="api (对外API)" value="api" />
+        </el-select>
       </el-form-item>
 
       <el-form-item label="菜单模块：">
@@ -92,7 +96,7 @@ const codeTypeOptions = ref<{ label: string; value: string }[]>([]);
 
 const form = reactive({
   menuName: "",
-  appModule: "admin_plat",
+  appModules: ["admin_plat"] as string[],
   menuModule: "system",
   bizModule: "",
   tableGenerateCodeId: "",
@@ -123,7 +127,7 @@ watch(
 
 function resetForm() {
   form.menuName = "";
-  form.appModule = "admin_plat";
+  form.appModules = ["admin_plat"];
   form.menuModule = "system";
   form.bizModule = "";
   form.tableGenerateCodeId = "";
@@ -182,7 +186,7 @@ async function handleRun() {
     const res = await getGenerateCodeRun({
       tableGenerateCodeId: form.tableGenerateCodeId,
       menuName: form.menuName,
-      appModule: form.appModule,
+      appModules: form.appModules,
       menuModule: form.menuModule,
       bizModule: form.bizModule,
       codeType: form.codeType,
