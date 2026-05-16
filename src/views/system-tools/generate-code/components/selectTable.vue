@@ -184,8 +184,10 @@ async function handleTableChange(val: string) {
 function getDefaultFormType(col: any): string {
   const name = (col.column_name ?? "").toLowerCase();
   const type = (col.data_type ?? "").toLowerCase();
-  if (["date", "datetime", "timestamptz", "timestamp"].includes(type)) return "datetime";
-  if (type.includes("int") && (name.includes("status") || name.includes("type"))) return "radio";
+  const datetimeTypes = ["date", "datetime", "timestamptz", "timestamp", "timestamp without time zone", "timestamp with time zone", "time without time zone", "time with time zone"];
+  if (datetimeTypes.includes(type)) return "datetime";
+  const intTypes = ["smallint", "integer", "int2", "int4", "bigint", "int8", "numeric", "decimal"];
+  if (intTypes.includes(type) && (name.includes("status") || name.includes("type"))) return "radio";
   if (name.includes("image") || name.includes("img") || name.includes("avatar")) return "imageUpload";
   if (name.includes("file")) return "fileUpload";
   return "input";
@@ -193,15 +195,17 @@ function getDefaultFormType(col: any): string {
 
 function getDefaultValue(col: any): any {
   const defVal = col.column_default;
-  if (defVal === null || defVal === undefined) return null;
   const type = (col.data_type ?? "").toLowerCase();
-  if (/^(int|bigint|smallint|integer|float|double|decimal|numeric)/i.test(type)) {
+  const numTypes = ["smallint", "integer", "int2", "int4", "bigint", "int8", "real", "float4", "double precision", "float8", "numeric", "decimal"];
+  if (numTypes.includes(type) || /^(int|bigint|smallint|integer|float|double|decimal|numeric|real)/i.test(type)) {
     const n = Number(defVal);
     return isNaN(n) ? null : n;
   }
-  if (/^(bool|boolean)/i.test(type)) {
+  if (type === "boolean" || type === "bool") {
     return [true, "true", 1, "1"].includes(defVal);
   }
+  
+  if (defVal === null || defVal === undefined) return "";
   return String(defVal).replace(/::.*$/, "").replace(/'/g, "");
 }
 
