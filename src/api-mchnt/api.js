@@ -11,6 +11,7 @@ export const GET_USER_UNIT_LIST = `/api/admin_plat/admin_mchnt/auth-mchnt/get-us
 export const GET_CAPTCHA = `/api/admin_plat/admin_mchnt/auth/get-captcha`;
 export const GET_ASYNC_ROUTES = `/api/admin_plat/admin_mchnt/auth-menu/get-async-routes`;
 export const GET_MODEL_PARAMS = `/api/admin_plat/admin_mchnt/auth-params/model-params`;
+export const UPLOAD = `/api/admin_plat/upload/upload`;
 export const VUE_SIMPLE_UPLOAD = `/api/admin_plat/admin_mchnt/upload/vue-slice-upload`;
 export const GET_UPLOAD_LINK_SIGN = `/api/admin_plat/admin_mchnt/upload/link-sign`;
 

@@ -1,4 +1,5 @@
 import { http } from "@/utils/http";
+import type { Result, ResultTable } from "@/utils/http/types.api";
 
 import { SYSTEM_UNIT_LIST, 
   SYSTEM_UNIT_ADD, 
@@ -31,27 +32,6 @@ import { SYSTEM_UNIT_LIST,
   SYSTEM_MENU_MCHNT_DEL ,
   SYSTEM_MENU_MCHNT_UNIT_TREE,
 } from "./api"
-
-type Result = {
-  code : number;
-  message: string;
-  data?: any;
-};
-
-type ResultTable = {
-  code : number;
-  message: string;
-  data?: {
-    /** 列表数据 */
-    list: Array<any>;
-    /** 总条目数 */
-    total?: number;
-    /** 每页显示条目个数 */
-    pageSize?: number;
-    /** 当前页数 */
-    currentPage?: number;
-  };
-};
 
 
 /** 系统管理-组织单位管理列表 */

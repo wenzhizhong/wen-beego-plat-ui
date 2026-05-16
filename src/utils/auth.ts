@@ -57,6 +57,12 @@ export function doRefreshToken(data) {
   });
 }
 
+/** 获取authorized-token */
+export async function getAuthorizedToken() {
+  let tmpAuthInfo = await getToken()
+  let authInfo = tmpAuthInfo && tmpAuthInfo as DataInfo
+  return authInfo && authInfo.accessToken? formatToken( authInfo.accessToken ):"";
+}
 /** 获取`token` */
 export async function getToken() {
 

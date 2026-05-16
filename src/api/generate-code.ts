@@ -1,4 +1,6 @@
 import { http } from "@/utils/http";
+import type { Result, ResultTable } from "@/utils/http/types.api";
+
 import {
   GENERATE_CODE_LIST,
   GENERATE_CODE_DB_TABLES,
@@ -10,22 +12,6 @@ import {
   GENERATE_CODE_DOWNLOAD
 } from "./api.js";
 
-type Result = {
-  code: number;
-  message: string;
-  data?: any;
-};
-
-type ResultTable = {
-  code: number;
-  message: string;
-  data?: {
-    list: Array<any>;
-    total?: number;
-    pageSize?: number;
-    currentPage?: number;
-  };
-};
 
 /** 获取代码生成配置列表 */
 export const getGenerateCodeList = (params?: object) => {

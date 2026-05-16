@@ -1,6 +1,6 @@
 import * as jose from 'jose'
 import type {KeyObject, CompactJWEHeaderParameters} from 'jose'
-
+import { getVarType } from "@/utils/util.js"
 
 
 type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
@@ -69,6 +69,9 @@ function serializeForPayload(data: JsonValue): string {
   if (Array.isArray(data)) {
     const elems = data.map(item => serializeForPayload(item));
     return '[' + elems.join(',') + ']';
+  }
+  if (data instanceof Date) {
+    return data.toISOString();
   }
   if (typeof data === 'object') {
     const keys = Object.keys(data).sort(); // ASCII 排序

@@ -194,7 +194,7 @@
             }
         }
         // 计算MD5  
-        setFileMD5(file, props.uploaderOption.chunkSize)
+        setFileMD5(file, props.uploaderOption.chunkSize || options.chunkSize)
       }
       const filesSubmitted =(files, fileList, event)=>{
         console.log("filesSubmitted():", files, fileList, event)

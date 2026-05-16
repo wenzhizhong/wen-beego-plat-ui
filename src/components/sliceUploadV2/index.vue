@@ -160,7 +160,7 @@
           }
       }
       // 计算MD5  
-      setFileMD5(file, props.uploaderOption.chunkSize)
+      setFileMD5(file, props.uploaderOption.chunkSize || option.chunkSize)
     })
     uploadObj.on('fileSuccess', function (rootFile, file, message) {
       console.log(rootFile, file, message)
