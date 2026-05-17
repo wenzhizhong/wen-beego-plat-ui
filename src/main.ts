@@ -24,6 +24,13 @@ import "./assets/iconfont/iconfont.css";
 
 const app = createApp(App);
 
+// dayjs
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
 // 自定义指令
 import * as directives from "@/directives";
 Object.keys(directives).forEach(key => {
