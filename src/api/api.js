@@ -14,6 +14,7 @@ export const GET_MODEL_PARAMS = `/api/admin_plat/auth-params/model-params`;
 export const UPLOAD = `/api/admin_plat/upload/upload`;
 export const VUE_SIMPLE_UPLOAD = `/api/admin_plat/upload/vue-slice-upload`;
 export const GET_UPLOAD_LINK_SIGN = `/api/admin_plat/upload/link-sign`;
+export const GET_LINK_BY_ID = `/api/admin_plat/upload/get-link-by-id`;
 
 
 // system

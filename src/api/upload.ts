@@ -2,7 +2,7 @@ import axios from "axios";
 import { http } from "@/utils/http";
 import { Result } from "@/utils/http/types.api";
 import { DataInfo, formatToken, getAuthorizedToken, getToken } from "@/utils/auth";
-import { UPLOAD, GET_UPLOAD_LINK_SIGN } from "@/api/api.js"
+import { UPLOAD, GET_UPLOAD_LINK_SIGN, GET_LINK_BY_ID } from "@/api/api.js"
 import Cookies from "js-cookie";
 import { message } from "@/utils/message";
 import { computeFileMD5 } from "@/utils/file";
@@ -38,4 +38,11 @@ export const upload = async (file : File, fileName : string ="", fileSize : numb
 }
 export const get_link_sign = async (params: any) => { 
   return http.request<Result>("get", GET_UPLOAD_LINK_SIGN, { params });
+};
+
+export const getLinkById = async (fileIds: string[] | string) => { 
+  fileIds = Array.isArray(fileIds) ? fileIds : fileIds.split(",")
+  if (!fileIds || fileIds.length <= 0) 
+    return new Promise<Result>((resolve, reject) => reject({code: 500, message: "fileIds 不能为空" }));
+  return http.request<Result>("get", GET_LINK_BY_ID, { params: {ids: fileIds.join(",")} });
 };
