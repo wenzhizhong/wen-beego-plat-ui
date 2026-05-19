@@ -245,16 +245,19 @@ function getDefaultFormParam(formType: string, col: any): string {
       });
       break;
     case "switch":
-      formParam = JSON.stringify({ ts: "", vue: `active-text="启用" inactive-text="禁用"` });
+      formParam = JSON.stringify({
+        ts: `const ${name}Options = [{id: 1, name: '是'}, {id: 0, name: '否'}]`,
+        vue: `:active-text="${name}Options[0]['name']" :inactive-text="${name}Options[1]['name']"`
+      });
       break;
     case "datetime":
       formParam = JSON.stringify({ ts: "", vue: `` });
       break;
     case "imageUpload":
-      formParam = JSON.stringify({ ts: "", vue: `multiple` });
+      formParam = JSON.stringify({ ts: "", vue: `':multiple': false` });
       break;
     case "fileUpload":
-      formParam = JSON.stringify({ ts: "", vue: `multiple` });
+      formParam = JSON.stringify({ ts: "", vue: `':multiple': true` });
       break;
     case "editor":
       formParam = JSON.stringify({ ts: "", vue: `` });
