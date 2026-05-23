@@ -78,7 +78,7 @@
               link
               type="primary"
               :size="size"
-              :icon="useRenderIcon('ri/code-s-slash-line')"
+              :icon="useRenderIcon(CodeBoxLine)"
               @click="openGenCode(row)"
             >
               生成代码
@@ -119,7 +119,7 @@ import SelectTable from "./components/selectTable.vue";
 import GenCode from "./components/genCode.vue";
 
 import Refresh from "~icons/ep/refresh";
-import AddFill from "~icons/ri/add-circle-line";
+import CodeBoxLine from "~icons/ri/code-box-line";
 import Delete from "~icons/ep/delete";
 import EditPen from "~icons/ep/edit-pen";
 

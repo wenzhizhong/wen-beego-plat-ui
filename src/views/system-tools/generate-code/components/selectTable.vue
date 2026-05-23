@@ -254,10 +254,12 @@ function getDefaultFormParam(formType: string, col: any): string {
       formParam = JSON.stringify({ ts: "", vue: `` });
       break;
     case "imageUpload":
-      formParam = JSON.stringify({ ts: "", vue: `':multiple': false` });
+      // json 键值对
+      formParam = JSON.stringify({ ts: "", vue: `'multiple': false,` }); 
       break;
     case "fileUpload":
-      formParam = JSON.stringify({ ts: "", vue: `':multiple': true` });
+      // json 键值对
+      formParam = JSON.stringify({ ts: "", vue: `'multiple': true,` });
       break;
     case "editor":
       formParam = JSON.stringify({ ts: "", vue: `` });

@@ -86,7 +86,7 @@ onMounted(() => {
   <div :class="['flex']">
     <SelectUserUnitTree
       ref="treeRef"
-      :apiType="'page-system-menu'"
+      :apiType="'for-mchnt-unit-tree'"
       @tree-select="onTreeSelect"
       :defaultCheckedKeys="defaultCheckedKeys"
       :currentNodeKey="currentNodeKey"

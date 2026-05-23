@@ -10,7 +10,7 @@ import { getMenuMchntUnitTree } from "@/api/system";
 const props = defineProps({
   apiType:{
     type: String,
-    default: "" // page-system-menu
+    default: "" // for-mchnt-unit-tree
   },
   changed:{
     type: Function,
@@ -89,7 +89,7 @@ function getUserUnit_() {
   };
 
   switch (props.apiType) {
-    case "page-system-menu":
+    case "for-mchnt-unit-tree":
       getMenuMchntUnitTree({}).then(callback);
       break;
     default :

@@ -49,7 +49,7 @@ export function useGenerateCode() {
     {
       label: "操作",
       fixed: "right",
-      width: 200,
+      width: 300,
       slot: "operation"
     }
   ];

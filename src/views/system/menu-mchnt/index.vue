@@ -43,7 +43,7 @@ function onFullscreen() {
     <SelectUserUnitTree
       ref="treeRef"
       @tree-select="onTreeSelect"
-      :apiType="'page-system-menu'"
+      :apiType="'for-mchnt-unit-tree'"
     />
     <div class="main">
       <el-form
