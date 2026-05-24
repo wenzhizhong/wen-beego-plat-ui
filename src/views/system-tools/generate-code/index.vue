@@ -22,7 +22,7 @@
 
     <PureTableBar title="代码生成" :columns="columns" @refresh="onSearch">
       <template #buttons>
-        <el-button type="primary" :icon="useRenderIcon(AddFill)" @click="openSelectTable()">
+        <el-button type="primary" :icon="useRenderIcon(Plus)" @click="openSelectTable()">
           添加
         </el-button>
         <el-button type="danger" :icon="useRenderIcon(Delete)" :disabled="selectedNum === 0" @click="onBatchDel">
@@ -119,6 +119,7 @@ import SelectTable from "./components/selectTable.vue";
 import GenCode from "./components/genCode.vue";
 
 import Refresh from "~icons/ep/refresh";
+import Plus from "~icons/ep/plus";
 import CodeBoxLine from "~icons/ri/code-box-line";
 import Delete from "~icons/ep/delete";
 import EditPen from "~icons/ep/edit-pen";

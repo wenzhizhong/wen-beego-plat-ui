@@ -69,14 +69,21 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="comment" label="字段备注" width="200" />
+        <el-table-column prop="comment" label="字段备注" width="200">
+          <template #default="{ row }">
+            <div class="comment-column">
+              <span class="comment-column-star">*</span>
+              <el-input v-model="row.comment" placeholder="请输入字段备注"/>
+            </div>
+          </template>
+        </el-table-column>
         <el-table-column label="表单参数" >
           <template #default="{ row }">
             <el-input
               v-model="row.formParam"
               size="small"
               type="textarea"
-              placeholder='参数示例：size="small" disabled'
+              placeholder='参数示例'
               class="c-textarea-font-size"
             />
           </template>
@@ -342,7 +349,7 @@ function handleClose() {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .label-text {
   display: inline-block;
   height: 32px;
@@ -354,5 +361,21 @@ function handleClose() {
 }
 .c-textarea-font-size{
   font-size: 16px;
+}
+
+.comment-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span.comment-column-star {
+    display: block;
+    box-sizing: border-box;
+    color: red;
+    height: 22px;
+    line-height: 22px;  
+    font-size: 22px;
+    margin-right: 4px;
+    padding-top: 4px;
+  }
 }
 </style>
