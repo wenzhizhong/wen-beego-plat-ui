@@ -128,23 +128,17 @@ function handelSelectUserUnit(val) {
   props.changed(val);
 }
 
-// watch(
-//   () => props.modelValue, 
-//   (val) => {
-//     if (!val) return; 
-//     let varType = getVarType(val)
-//     if (varType === "string" || varType === "number"){
-//       state.pid = [val];
-//     }else{
-//       state.pid = val as Array<any> ;
-//     }
-//     console.log('val', val,  getVarType(val));
-//   }, 
-//   { 
-//     deep: true,
-//     immediate: true
-//   }
-// );
+watch(
+  () => props.modelValue, 
+  (val) => {
+    if (!val) return; 
+    getUserUnit_();
+  }, 
+  { 
+    deep: true,
+    immediate: true
+  }
+);
 
 </script>
 <template>
