@@ -2,11 +2,12 @@
   import { computed, ref, watch } from 'vue';
   import {getFileSuffix, getFileName} from "@/utils/util.js"
   import  Uploader from 'simple-uploader.js/dist/uploader.min.js'
-  import { getUploadToken, getVarType, getBatchId, setFileMD5 } from '../sliceUpload/common'
+  import { getVarType, getBatchId, setFileMD5 } from '../sliceUpload/common'
   import { VUE_SIMPLE_UPLOAD } from "@/api/api.js"
   // import AddLargeLine from "~icons/ri/add-large-line";
   import { ElMessage } from 'element-plus';
   import VideoPlayer from "@/components/VideoPlayer/index.vue"
+  import { getAuthorizedToken } from '@/utils/auth';
 
   
   const showImagePreview = ref(false)
@@ -110,7 +111,7 @@
       limit: props.elementPlusUploader['limit']
     };
   });
-  function doUpload(file) { 
+  async function doUpload(file) { 
     // el-upload 传递的 file 对象可能需要提取原生 File 对象
     let actualFile = file.raw || file; // 尝试获取原始文件对象
 
@@ -120,7 +121,7 @@
     option.forceChunkSize = true;
     option.chunkSize = option.chunkSize || 20 * 1024 * 1024; // 设置合适的分片大小
     option.headers = {
-      'Authorization': getUploadToken() // 在添加added file的时候再设置Authorization
+      'Authorization': await getAuthorizedToken() // 在添加added file的时候再设置Authorization
     }
     // 额外的自定义查询参数
     option.query= (file, chunk) => {

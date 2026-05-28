@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import { useUserStoreHook } from "@/store/modules/user";
 import { storageLocal, isString, isIncludeAllChildren, storageSession } from "@pureadmin/utils";
+import { message } from "./message";
 
 export const userKey = "user-info";
 export const unitKey = "unit-info";
@@ -61,7 +62,11 @@ export function doRefreshToken(data) {
 export async function getAuthorizedToken() {
   let tmpAuthInfo = await getToken()
   let authInfo = tmpAuthInfo && tmpAuthInfo as DataInfo
-  return authInfo && authInfo.accessToken? formatToken( authInfo.accessToken ):"";
+  let token = authInfo && authInfo.accessToken? formatToken( authInfo.accessToken ):"";
+  if (!token){
+    message("请先登录！", { type: "error" })
+  }
+  return token;
 }
 /** 获取`token` */
 export async function getToken() {

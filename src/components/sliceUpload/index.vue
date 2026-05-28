@@ -41,9 +41,10 @@
 <script lang="ts">
   import { nextTick, ref, onMounted, defineOptions, computed } from 'vue'
   import SparkMD5 from "spark-md5";
-  import { getUploadToken, getVarType, getBatchId, setFileMD5 } from "./common"
+  import { getVarType, getBatchId, setFileMD5 } from "./common"
   import { VUE_SIMPLE_UPLOAD } from "@/api/api.js"
   import { ElMessage } from 'element-plus';
+import { getAuthorizedToken } from '@/utils/auth';
 
   
   // https://github.com/simple-uploader/vue-uploader/tree/vue3
@@ -89,7 +90,7 @@
       },
     },
 
-    setup (props) {
+    async setup (props) {
       const uploaderRef = ref<any>(null)
       const options = {
         target: VUE_SIMPLE_UPLOAD,
@@ -101,7 +102,7 @@
         maxChunkRetries: props.uploaderOption && props.uploaderOption.maxChunkRetries ? props.uploaderOption.maxChunkRetries : 10,  //最大自动失败重试上传次数
         generateUniqueIdentifier:true,
         headers: {
-            'Authorization': getUploadToken() // 在添加added file的时候再设置Authorization
+            'Authorization': await getAuthorizedToken() // 在添加added file的时候再设置Authorization
         },
         categoryMap:{
           image: ['gif', 'jpg', 'jpeg', 'png', 'bmp', 'webp'],

@@ -1,27 +1,6 @@
-import { getToken, formatToken, DataInfo } from "@/utils/auth";
+// import { getToken, formatToken, DataInfo } from "@/utils/auth";
 import { ElMessage } from "element-plus";
 import SparkMD5 from "spark-md5";
-
-let uploadTokenKey = "uploadToken"
-async function setUploadToken() {
-  try{
-    let tmpData = await getToken();
-    let userInfo = tmpData && tmpData as DataInfo || {} as DataInfo;
-    if (userInfo.accessToken) 
-      window[uploadTokenKey] = formatToken(userInfo.accessToken);
-  }catch(e) {
-    console.error(e)
-  }
-}
-setUploadToken()
-setInterval(async () => {
-  setUploadToken()
-}, 1000 * 60 )
-
-
-export function getUploadToken() {
-  return window[uploadTokenKey];
-}
 
 export function getVarType(varParam){
     return Object.prototype.toString.call(varParam).toLowerCase().replace(/(\[object )|\]/g, '');
