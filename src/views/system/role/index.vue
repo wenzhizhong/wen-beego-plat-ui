@@ -50,8 +50,6 @@ const formRef = ref();
 const tableRef = ref();
 const contentRef = ref();
 const treeHeight = ref();
-const defaultCheckedKeys = ref([])
-const currentNodeKey = ref("")
 const {
   form,
   isShow,
@@ -87,13 +85,6 @@ const {
 } = useRole(treeRef);
 
 onMounted(() => {
-  let tmpUnitId = default_unit_id.value || ""
-  form.selectUnitIds = tmpUnitId;
-  if(tmpUnitId) {
-    currentNodeKey.value = tmpUnitId;
-    defaultCheckedKeys.value = [tmpUnitId]
-  }
-
   useResizeObserver(contentRef, async () => {
     await nextTick();
     delay(60).then(() => {
@@ -113,8 +104,8 @@ onMounted(() => {
     <SelectUserUnitTree
       ref="treeRef"
       @tree-select="onTreeSelect"
-      :defaultCheckedKeys="defaultCheckedKeys"
-      :currentNodeKey="currentNodeKey"
+      :defaultCheckedKeys="[default_unit_id]"
+      :currentNodeKey="default_unit_id"
     />
     <div >
       <el-form

@@ -10,10 +10,13 @@ import type { FormItemProps } from "./types";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import { cloneDeep, isAllEmpty, deviceDetection } from "@pureadmin/utils";
 import { ElMessageBox } from "element-plus";
+import { useUserStoreHook } from "@/store/modules/user.js";
 // import {useDbModelParamsStoreHook } from "@/store/modules/globalParams";
 
 export function useMenu() {
   // const { unit_menu_type_map } = useDbModelParamsStoreHook();
+  const { default_unit_id: tmpDefaultUnitId } = useUserStoreHook();
+  const default_unit_id = ref(tmpDefaultUnitId);
   const form = reactive({
     title: "",
     selectUnitIds: "",
@@ -281,5 +284,6 @@ export function useMenu() {
     handleDelete,
     handleSelectionChange,
     onTreeSelect,
+    default_unit_id,
   };
 }

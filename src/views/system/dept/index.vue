@@ -28,6 +28,7 @@ const {
   handleDelete,
   handleSelectionChange,
   onTreeSelect,
+  default_unit_id,
 } = useDept();
 
 function onFullscreen() {
@@ -41,6 +42,8 @@ function onFullscreen() {
     <SelectUserUnitTree
       ref="treeRef"
       @tree-select="onTreeSelect"
+      :defaultCheckedKeys="[default_unit_id]"
+      :currentNodeKey="default_unit_id"
     />
     <div class="main" style="width: 100%;" >
       <el-form

@@ -51,6 +51,8 @@ import { useUserStoreHook } from "@/store/modules/user";
 const { unit_gender_map, unit_user_source_map, unit_card_type_map, unit_user_profile_map } = useDbModelParamsStoreHook();
 
 export function useUser(tableRef: Ref, treeRef: Ref) {
+  const { default_unit_id: tmpDefaultUnitId } = useUserStoreHook();
+  const default_unit_id = ref(tmpDefaultUnitId);
   const form = reactive({
     // 部门树的id
     deptId: "",
@@ -71,7 +73,6 @@ export function useUser(tableRef: Ref, treeRef: Ref) {
   const treeData = ref([]);
   const treeLoading = ref(true);
   const selectedNum = ref(0);
-  const default_unit_id = ref("");
   const radioBttonParams = reactive({
     gender:[],
     card_type:[],

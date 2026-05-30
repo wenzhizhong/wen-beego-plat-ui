@@ -9,11 +9,14 @@ import { reactive, ref, onMounted, h } from "vue";
 import type { FormItemProps } from "../utils/types";
 import { cloneDeep, isAllEmpty, deviceDetection } from "@pureadmin/utils";
 import { ElMessageBox } from "element-plus";
+import { useUserStoreHook } from "@/store/modules/user.js";
 
 export function useDept() {
+  const { default_unit_id: tmpDefaultUnitId } = useUserStoreHook();
+  const default_unit_id = ref(tmpDefaultUnitId);
   const form = reactive({
     name: "",
-    selectUnitIds: "",
+    selectUnitIds: default_unit_id || "",
     status: null,
   });
 
@@ -234,5 +237,6 @@ export function useDept() {
     handleSelectionChange,
     onTreeSelect,
     getDeptPrincipalApi,
+    default_unit_id,
   };
 }

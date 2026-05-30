@@ -15,7 +15,6 @@ import { getToken, formatToken, DataInfo, getWhiteApiList} from "@/utils/auth";
 import { useUserStoreHook } from "@/store/modules/user";
 import { ElMessageBox } from "element-plus";
 import { sigAndEnc } from "@/utils/jose/jws";
-import { getVarType } from "@/components/sliceUpload/common";
 
 let tmpMethodMap = {
   "post": true,
@@ -163,13 +162,6 @@ class PureHttp {
       ...param,
       ...axiosConfig
     } as PureHttpRequestConfig;
-    
-    let selectUnitIdsType = getVarType(config?.params?.["selectUnitIds"])
-    if (config?.params?.["selectUnitIds"] === ""){
-      config.params["selectUnitIds"] = this.getDefaultUnitId()
-    }else if (selectUnitIdsType === "array" && config?.params?.["selectUnitIds"].length === 0){
-      config.params["selectUnitIds"] = [config.params["selectUnitIds"]]
-    }
 
     // 单独处理自定义请求/响应回调
     return new Promise((resolve, reject) => {
@@ -221,13 +213,6 @@ class PureHttp {
     config?: PureHttpRequestConfig
   ): Promise<T> {
     return this.request<T>("get", url, params, config);
-  }
-
-  
-  /** 获取默认组织单位id */
-  private getDefaultUnitId(): string{
-    const { default_unit_id } = useUserStoreHook();
-    return default_unit_id
   }
 }
 

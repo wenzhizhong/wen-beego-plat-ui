@@ -23,10 +23,12 @@ export function useRole(treeRef: Ref) {
     pids : string[]
   }
 
+  const { default_unit_id: tmpDefaultUnitId } = useUserStoreHook();
+  const default_unit_id = ref(tmpDefaultUnitId);
   const form = reactive({
     role_name: "",
     status: "-1",
-    selectUnitIds: "",
+    selectUnitIds: tmpDefaultUnitId || "",
     role_classify_name: "",
   });
   const curRow = ref();
@@ -42,7 +44,6 @@ export function useRole(treeRef: Ref) {
   const switchLoadMap = ref({});
   const isExpandAll = ref(false);
   const isSelectAll = ref(false);
-  const default_unit_id = ref("");
   const { tagStyle } = usePublicHooks();
   const { switchStyle } = usePublicHooks();
   const treeProps = {
@@ -204,8 +205,7 @@ export function useRole(treeRef: Ref) {
     }, 500);
   }
   async function onSearchRoleMenu(){
-    const { default_unit_id: tmpDefaultUnitId } = useUserStoreHook();
-    await doGetRoleMenu(tmpDefaultUnitId);
+    await doGetRoleMenu();
   }
 
   const resetForm = formEl => {
@@ -357,12 +357,7 @@ export function useRole(treeRef: Ref) {
   const filterMethod = (query: string, node) => {
     return transformI18n(node.title)!.includes(query);
   };
-  const doGetRoleMenu = async (selectUnitIds) => { 
-    if(!selectUnitIds) return false;
-
-    form.selectUnitIds = selectUnitIds || "";
-    default_unit_id.value = selectUnitIds;
-
+  const doGetRoleMenu = async () => { 
     const { data } = await getRoleMenu(form);
     let tmpData = data && data.list || [];
     treeIds.value = getKeyList(tmpData, "id");
@@ -373,7 +368,7 @@ export function useRole(treeRef: Ref) {
   }
   async function onTreeSelect({ id, selected}){
     form.selectUnitIds = selected ? id : "";
-    await doGetRoleMenu(id);
+    await doGetRoleMenu();
     onSearch();
   }
 
