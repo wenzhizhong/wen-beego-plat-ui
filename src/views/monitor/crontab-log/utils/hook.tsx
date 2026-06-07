@@ -9,7 +9,7 @@ import { addDialog } from "@/components/ReDialog";
 import type { FormItemProps } from "./types";
 import type { PaginationProps } from "@pureadmin/table";
 import { getKeyList, deviceDetection, copyTextToClipboard } from "@pureadmin/utils";
-import { getCronLogList, avaibleCron} from "@/api/monitor";
+import { getCronLogList, availableCron} from "@/api/monitor";
 import { type Ref, reactive, ref, onMounted, h, toRaw, watch } from "vue";
 import { useUserStoreHook } from "@/store/modules/user";
 import { listToMap } from "@/utils/util.js";
@@ -42,8 +42,8 @@ export function useCron() {
   const isExpandAll = ref(false);
   const isSelectAll = ref(false);
   const default_unit_id = ref("");
-  const avaibleCronList = ref([]);
-  const avaibleCronMap = ref({});
+  const availableCronList = ref([]);
+  const availableCronMap = ref({});
 
 
   const { tagStyle } = usePublicHooks();
@@ -133,7 +133,7 @@ export function useCron() {
     let tmpDataList = data.list || [];
     for (let i = 0; i < tmpDataList.length; i++) {
       let name_en = tmpDataList[i]['name_en']
-      tmpDataList[i].name = avaibleCronMap.value?.[name_en]?.['name'] || "";
+      tmpDataList[i].name = availableCronMap.value?.[name_en]?.['name'] || "";
     }
     dataList.value = tmpDataList;
     pagination.total = data.total;
@@ -165,10 +165,10 @@ export function useCron() {
   };
 
   async function getAvaibleCron(){
-    await avaibleCron().then(res => {
+    await availableCron().then(res => {
       if(res?.data?.list){
-        avaibleCronList.value = res.data.list 
-        avaibleCronMap.value = listToMap(res.data.list, 'name_en')
+        availableCronList.value = res.data.list 
+        availableCronMap.value = listToMap(res.data.list, 'name_en')
       }
     })
   }
@@ -211,6 +211,6 @@ export function useCron() {
     handleCurrentChange,
     handleSelectionChange,
     default_unit_id,
-    avaibleCronList,
+    availableCronList,
   };
 }

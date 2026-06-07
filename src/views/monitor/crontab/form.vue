@@ -24,15 +24,15 @@ const showCronExprDialog = ref(false);
 
 const newFormInline = ref(props.formInline);
 const {
-  avaibleCronList
+  availableCronList
 }= useCron()
 function getRef() {
   return formRef.value;
 }
 function handelSelectName(val){
-  for (let i = 0; i < avaibleCronList.value.length; i++) {
-    if (avaibleCronList.value[i].name_en == val) {
-      newFormInline.value.name = avaibleCronList.value[i].name;
+  for (let i = 0; i < availableCronList.value.length; i++) {
+    if (availableCronList.value[i].name_en == val) {
+      newFormInline.value.name = availableCronList.value[i].name;
       break;
     }
   }
@@ -66,7 +66,7 @@ defineExpose({ getRef });
     <el-form-item label="名称" prop="name_en">
       <el-select v-model="newFormInline.name_en" @change="handelSelectName">
         <el-option
-          v-for="item in avaibleCronList"
+          v-for="item in availableCronList"
           :key="item.name_en"
           :label="item.name"
           :value="item.name_en"

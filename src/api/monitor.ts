@@ -31,7 +31,7 @@ export const delCron = (data?: object) => {
   return http.request<Result>("post", MONITOR_CRON_DEL, { data });
 };
 // 获取定时任务可用状态
-export const avaibleCron = async (params?: object) => {
+export const availableCron = async (params?: object) => {
   return http.request<Result>("get", MONITOR_CRON_AVAIBLE, { params });
 };
 // 开/关定时任务

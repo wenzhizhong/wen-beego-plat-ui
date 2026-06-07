@@ -10,7 +10,7 @@ import { addDialog } from "@/components/ReDialog";
 import type { FormItemProps } from "./types";
 import type { PaginationProps } from "@pureadmin/table";
 import { getKeyList, deviceDetection } from "@pureadmin/utils";
-import { getCronList,  addCron,  editCron,  delCron,  avaibleCron, changeStatusCron} from "@/api/monitor";
+import { getCronList,  addCron,  editCron,  delCron,  availableCron, changeStatusCron} from "@/api/monitor";
 import { type Ref, reactive, ref, onMounted, h, toRaw, watch } from "vue";
 import { useUserStoreHook } from "@/store/modules/user";
 import { hasPerms } from "@/utils/auth";
@@ -43,7 +43,7 @@ export function useCron() {
   const isExpandAll = ref(false);
   const isSelectAll = ref(false);
   const default_unit_id = ref("");
-  const avaibleCronList = ref([]);
+  const availableCronList = ref([]);
 
 
   const { tagStyle } = usePublicHooks();
@@ -305,9 +305,9 @@ export function useCron() {
   };
 
   function getAvaibleCron(){
-    avaibleCron().then(res => {
+    availableCron().then(res => {
       if(res?.data?.list){
-        avaibleCronList.value = res.data.list 
+        availableCronList.value = res.data.list 
       }
     })
   }
@@ -347,6 +347,6 @@ export function useCron() {
     handleCurrentChange,
     handleSelectionChange,
     default_unit_id,
-    avaibleCronList,
+    availableCronList,
   };
 }

@@ -66,7 +66,7 @@ const {
   handleSizeChange,
   handleCurrentChange,
   handleSelectionChange,
-  avaibleCronList,
+  availableCronList,
 } = useCron();
 
 onMounted(() => {
@@ -100,7 +100,7 @@ onMounted(() => {
       <el-form-item label="定时任务名称：" prop="name">
         <el-select v-model="form.name_en" style="width:180px">
           <el-option
-            v-for="item in avaibleCronList"
+            v-for="item in availableCronList"
             :key="item.name_en"
             :label="item.name"
             :value="item.name_en"
