@@ -1,5 +1,5 @@
 import { http } from "@/utils/http";
-import { LOGIN, CHANGE_UNIT, REFRESH_TOEKN, GET_CAPTCHA } from "@/api/api.js"
+import { LOGIN, CHANGE_UNIT, REFRESH_TOKEN, GET_CAPTCHA } from "@/api/api.js"
 import { unitItf } from "@/api/unit";
 
 export type UserResult = {
@@ -69,7 +69,7 @@ export const changeUnit = async (data?: object) => {
 /** 刷新`token` */
 export const refreshTokenApi = (data?: object) => {
   const headers = { "Authorization": null };
-  return http.request<UserResult>("post", REFRESH_TOEKN, { data }, { headers });
+  return http.request<UserResult>("post", REFRESH_TOKEN, { data }, { headers });
 };
 /** 获取验证码 */ 
 export const getCatpcha = async () => {

@@ -4,6 +4,7 @@ import { SYSTEM_UNIT_LIST,
   SYSTEM_UNIT_ADD, 
   SYSTEM_UNIT_EDIT, 
   SYSTEM_UNIT_DEL, 
+  SYSTEM_UNIT_CHANGE_STATUS,
   SYSTEM_DEPT_LIST,SYSTEM_DEPT_DEPT_TREE, 
   SYSTEM_DEPT_ADD, 
   SYSTEM_DEPT_DEL, 
@@ -63,6 +64,11 @@ export const delUnit = (data?: object) => {
 /** 系统管理-组织单位-编辑 */
 export const editUnit = (data?: object) => {
   return http.request<Result>("post", SYSTEM_UNIT_EDIT, { data });
+};
+
+/** 系统管理-组织单位-变更状态 */
+export const changeUnitStatus = (data?: object) => {
+  return http.request<Result>("post", SYSTEM_UNIT_CHANGE_STATUS, { data });
 };
 
 /** 系统管理-用户管理列表 */

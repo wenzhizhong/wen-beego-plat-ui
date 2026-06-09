@@ -5,7 +5,7 @@
 // auth
 export const LOGIN = `/api/admin_plat/admin_mchnt/auth/login`;
 export const LOGOUT = `/api/ba/admin_mchnt/auth/logout`;
-export const REFRESH_TOEKN = `/api/admin_plat/admin_mchnt/auth/refresh-token`;
+export const REFRESH_TOKEN = `/api/admin_plat/admin_mchnt/auth/refresh-token`;
 export const CHANGE_UNIT = `/api/admin_plat/admin_mchnt/auth-mchnt/change-unit`;
 export const GET_USER_UNIT_LIST = `/api/admin_plat/admin_mchnt/auth-mchnt/get-user-unit-list`;
 export const GET_CAPTCHA = `/api/admin_plat/admin_mchnt/auth/get-captcha`;
@@ -21,6 +21,7 @@ export const SYSTEM_UNIT_LIST = `/api/admin_plat/admin_mchnt/system-unit/get`;
 export const SYSTEM_UNIT_ADD = `/api/admin_plat/admin_mchnt/system-unit/add`;
 export const SYSTEM_UNIT_EDIT = `/api/admin_plat/admin_mchnt/system-unit/edit`;
 export const SYSTEM_UNIT_DEL = `/api/admin_plat/admin_mchnt/system-unit/del`;
+export const SYSTEM_UNIT_CHANGE_STATUS = `/api/admin_plat/admin_mchnt/system-unit/change-status`;
 
 export const SYSTEM_DEPT_LIST = `/api/admin_plat/admin_mchnt/system-dept/get`;
 export const SYSTEM_DEPT_ADD = `/api/admin_plat/admin_mchnt/system-dept/add`;

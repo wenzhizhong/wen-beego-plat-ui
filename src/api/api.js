@@ -5,7 +5,7 @@
 // auth
 export const LOGIN = `/api/admin_plat/auth/login`;
 export const LOGOUT = `/api/ba/admin_plat/auth/logout`;
-export const REFRESH_TOEKN = `/api/admin_plat/auth/refresh-token`;
+export const REFRESH_TOKEN = `/api/admin_plat/auth/refresh-token`;
 export const CHANGE_UNIT = `/api/admin_plat/auth-plat/change-unit`;
 export const GET_USER_UNIT_LIST = `/api/admin_plat/auth-plat/get-user-unit-list`;
 export const GET_CAPTCHA = `/api/admin_plat/auth/get-captcha`;
@@ -22,6 +22,7 @@ export const SYSTEM_UNIT_LIST = `/api/admin_plat/system-unit/get`;
 export const SYSTEM_UNIT_ADD = `/api/admin_plat/system-unit/add`;
 export const SYSTEM_UNIT_EDIT = `/api/admin_plat/system-unit/edit`;
 export const SYSTEM_UNIT_DEL = `/api/admin_plat/system-unit/del`;
+export const SYSTEM_UNIT_CHANGE_STATUS = `/api/admin_plat/system-unit/change-status`;
 
 export const SYSTEM_DEPT_LIST = `/api/admin_plat/system-dept/get`;
 export const SYSTEM_DEPT_ADD = `/api/admin_plat/system-dept/add`;
@@ -62,7 +63,7 @@ export const MONITOR_CRON_GET = `/api/admin_plat/monitor-cron/get`;
 export const MONITOR_CRON_ADD = `/api/admin_plat/monitor-cron/add`;
 export const MONITOR_CRON_EDIT = `/api/admin_plat/monitor-cron/edit`;
 export const MONITOR_CRON_DEL = `/api/admin_plat/monitor-cron/del`;
-export const MONITOR_CRON_AVAIBLE = `/api/admin_plat/monitor-cron/get-available`;
+export const MONITOR_CRON_AVAILABLE = `/api/admin_plat/monitor-cron/get-available`;
 export const MONITOR_CRON_START = `/api/admin_plat/monitor-cron/start`;
 export const MONITOR_CRON_STOP = `/api/admin_plat/monitor-cron/stop`;
 export const MONITOR_CRON_CHANGE_STATUS = `/api/admin_plat/monitor-cron/change-status`;

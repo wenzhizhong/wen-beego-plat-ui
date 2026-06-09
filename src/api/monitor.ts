@@ -6,7 +6,7 @@ import {
   MONITOR_CRON_ADD,
   MONITOR_CRON_EDIT,
   MONITOR_CRON_DEL,
-  MONITOR_CRON_AVAIBLE,
+  MONITOR_CRON_AVAILABLE,
   MONITOR_CRON_START, 
   MONITOR_CRON_STOP,
   MONITOR_CRON_CHANGE_STATUS,
@@ -32,7 +32,7 @@ export const delCron = (data?: object) => {
 };
 // 获取定时任务可用状态
 export const availableCron = async (params?: object) => {
-  return http.request<Result>("get", MONITOR_CRON_AVAIBLE, { params });
+  return http.request<Result>("get", MONITOR_CRON_AVAILABLE, { params });
 };
 // 开/关定时任务
 

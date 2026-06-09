@@ -19,7 +19,7 @@ interface FormItemProps {
 interface FormProps {
   formInline: FormItemProps;
   unitSelectList : Array<any>;
-  onUoloadLogoChange: (e)=>{}
+  onUploadLogoChange: (e)=>{}
 }
 
 export type { FormItemProps, FormProps };

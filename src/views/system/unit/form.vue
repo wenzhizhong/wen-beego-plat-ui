@@ -16,6 +16,8 @@ import AddLargeLine from "~icons/ri/add-large-line";
 // import Segmented from "@/components/ReSegmented";
 // import ReAnimateSelector from "@/components/ReAnimateSelector";
 // import { } from "./utils/enums";
+import {useDbModelParamsStoreHook } from "@/store/modules/globalParams";
+const { unit_status_map } = useDbModelParamsStoreHook();
 
 const props = withDefaults(defineProps<FormProps>(), {
   formInline: () => ({
@@ -217,10 +219,7 @@ defineExpose({ getRef, handelSelectUserUnit });
             class="w-full"
             placeholder="请选择状态"
           >
-            <el-option :value="0" label="未审核" />
-            <el-option :value="1" label="审核通过" />
-            <el-option :value="2" label="审核不通过" />
-            <el-option :value="3" label="禁用" />
+             <el-option v-for="(item, index) in unit_status_map" :key="index" :value="Number(index)" :label="item" />
           </el-select>
         </el-form-item>
       </re-col>

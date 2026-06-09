@@ -1,7 +1,7 @@
 import editForm from "../form.vue";
 import { handleTree } from "@/utils/tree";
 import { message } from "@/utils/message";
-import { getUnitList, addUnit, editUnit, delUnit } from "@/api-mchnt/system";
+import { getUnitList, addUnit, editUnit, delUnit, changeUnitStatus } from "@/api-mchnt/system";
 // import { transformI18n } from "@/plugins/i18n";
 let transformI18n = (label: string) => label; // 不需要i18n,临时解决i18n报错
 import { addDialog } from "@/components/ReDialog";
@@ -12,8 +12,10 @@ import { cloneDeep, isAllEmpty, deviceDetection } from "@pureadmin/utils";
 import type  { PaginationProps } from "@pureadmin/table";
 import { ElMessageBox } from "element-plus";
 import { timestampToDatetime } from "@/utils/time";
+import { usePublicHooks } from "../../hooks";
 // import { status } from "nprogress";
-// import {useDbModelParamsStoreHook } from "@/store/modules/globalParams";
+import {useDbModelParamsStoreHook } from "@/store/modules/globalParams";
+const { unit_status_map } = useDbModelParamsStoreHook();
 
 export function useHook() {
   const form = reactive({
@@ -33,6 +35,8 @@ export function useHook() {
     currentPage: 1,
     background: true,
   });
+  const switchLoadMap = ref({});
+  const { switchStyle } = usePublicHooks();
   
   //状态： 0未审核，1审核通过，2审核不通过，3禁用
   const getStatusMap = {
@@ -93,15 +97,22 @@ export function useHook() {
     {
       label: "状态",
       prop: "status",
-      width: 100,
-      cellRenderer: ({ row, props }) => (
-        <el-tag
-          size={props.size}
-          type={getStatusMap[row.status].type}
-          effect="plain"
+      width: 140,
+      cellRenderer: scope => (
+        <el-select
+          modelValue={scope.row.status}
+          class="w-full"
+          placeholder="请选择状态"
+          size={scope.props.size === "small" ? "small" : "default"}
+          onChange={(val) => {
+            scope.row.status = val;
+            handleStatusChange(scope);
+          }}
         >
-          {getStatusMap[row.status].text}
-        </el-tag>
+          {Object.entries(unit_status_map).map(([key, value]) => (
+            <el-option key={key} value={Number(key)} label={value} />
+          ))}
+        </el-select>
       )
     },
     {
@@ -196,14 +207,14 @@ export function useHook() {
           deletedAt: row?.deletedAt ?? null,
         },
         unitSelectList:[],
-        onUoloadLogoChange: onUoloadLogoChange
+        onUploadLogoChange: onUploadLogoChange
       },
       width: "45%",
       draggable: true,
       fullscreen: deviceDetection(),
       fullscreenIcon: true,
       closeOnClickModal: false,
-      contentRenderer: () => h(editForm, { ref: formRef, formInline: null, unitSelectList: [], onUoloadLogoChange:null }),
+      contentRenderer: () => h(editForm, { ref: formRef, formInline: null, unitSelectList: [], onUploadLogoChange:null }),
       beforeSure: (done, { options }) => {
         const FormRef = formRef.value.getRef();
         const curData = options.props.formInline as FormItemProps;
@@ -267,6 +278,36 @@ export function useHook() {
     });
   }
 
+  function handleStatusChange({ row, index }) {
+    ElMessageBox.confirm(
+      `确认要<strong>${row.status === 0 ? "停用" : "启用"}</strong><strong style="color:var(--el-color-primary)">${row.name}</strong>吗?`,
+      "系统提示",
+      {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+        dangerouslyUseHTMLString: true,
+        draggable: true
+      }
+    ).then(() => {
+      switchLoadMap.value[row.id] = Object.assign({}, switchLoadMap.value[row.id], { loading: true });
+      changeUnitStatus({ id: row.id, status: row.status }).then((res: any) => {
+        switchLoadMap.value[row.id] = Object.assign({}, switchLoadMap.value[row.id], { loading: false });
+        if (res.code === 200) {
+          message("状态修改成功", { type: "success" });
+        } else {
+          message(res.message || "操作失败", { type: "error" });
+          row.status = row.status === 0 ? 1 : 0;
+        }
+      }).catch(() => {
+        switchLoadMap.value[row.id] = Object.assign({}, switchLoadMap.value[row.id], { loading: false });
+        row.status = row.status === 0 ? 1 : 0;
+      });
+    }).catch(() => {
+      row.status = row.status === 0 ? 1 : 0;
+    });
+  }
+
   function handleDelete(row) {
     delUnit({ id: row.id }).then((res) => { 
       if (res.code === 200) { 
@@ -288,7 +329,7 @@ export function useHook() {
   }
 
   /** form 表单页 开始 */ 
-  function onUoloadLogoChange(e){
+  function onUploadLogoChange(e){
     console.log(e)
   }
   /** form 表单页 结束 */ 
@@ -313,6 +354,8 @@ export function useHook() {
     openDialog,
     /** 删除组织单位 */
     handleDelete,
+    handleStatusChange,
+    switchLoadMap,
     handleSizeChange,
     handleCurrentChange,
     handleSelectionChange
