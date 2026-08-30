@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent, ref, watch, computed, unref, shallowRef, reactive } from "vue";
+import { defineComponent, ref, watch, computed, unref, shallowRef, reactive, onMounted, onBeforeUnmount } from "vue";
 import { storeToRefs } from "pinia";
 import { storageLocal, storageSession } from "@pureadmin/utils";
 import { initRouter } from "@/router/utils";
@@ -26,6 +26,7 @@ const state = reactive({
 })
 const unitList = shallowRef([]);
 const show_ = ref(false);
+const dialogWidth = ref("500px");
 const { id: unitId, name: unitName, logo: unitLogo } = storeToRefs(useUnitStoreHook());
 
 const emit = defineEmits<{
@@ -37,10 +38,17 @@ defineOptions({
   name: "SelectUserUnit",
   isLoad:"isLoad"
 });
+onMounted(() => {
+  window.addEventListener("resize", setDialogWidth);
+})
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", setDialogWidth);
+})
 
 watch(() => props.show, (val) => {
   show_.value = val;
   if (val) {
+    setDialogWidth();
     // 获取组织列表
     getUserUnit_();
   }
@@ -135,13 +143,25 @@ async function requestChangeUnit(){
   })
 }
 
+
+async function setDialogWidth() {
+  const w = window.innerWidth
+  if (w < 480) {
+    dialogWidth.value = '95%'
+  } else if (w < 768) {
+    dialogWidth.value = '70%'
+  } else {
+    dialogWidth.value = '500px'  // PC 默认
+  }
+}
+
 </script>
 <template>
   <el-dialog
     v-model="show_"
     title="切换组织"
     :close-on-click-modal="false"
-    :width="'500px'"
+    :width="dialogWidth"
     @close="close"
     append-to-body
   >
