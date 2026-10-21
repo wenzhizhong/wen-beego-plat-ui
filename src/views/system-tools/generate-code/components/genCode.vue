@@ -11,7 +11,7 @@
         <el-input :model-value="genData?.table_name ?? ''" disabled />
       </el-form-item>
 
-      <el-form-item label="菜单名称：">
+      <el-form-item label="左侧菜单名称：">
         <el-input v-model="form.menuName" placeholder="请输入中文菜单名称" />
       </el-form-item>
 
@@ -23,7 +23,7 @@
         </el-select>
       </el-form-item>
 
-      <el-form-item label="菜单模块：">
+      <el-form-item label="代码包名：">
         <el-input v-model="form.menuModule" placeholder="如：system、monitor" />
       </el-form-item>
 

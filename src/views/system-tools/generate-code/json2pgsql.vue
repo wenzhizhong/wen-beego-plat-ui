@@ -49,6 +49,7 @@ const jsonStr = ref("");
 
 const pgDataType: Record<string, string> = {
   int: "int4",
+  bigint: "int8",
   number: "int4",
   string: "varchar(255)",
   float: "numeric(10,2)",
@@ -108,7 +109,7 @@ function handleTextareaChange() {
       form.primaryKey = "id";
       pgType = "bpchar(36)";
       notNull = true;
-    } else if (["int", "number", "float"].includes(type)) {
+    } else if (["int", "bigint", "number", "float"].includes(type)) {
       defVal = "0";
     } else if (type === "bool" || type === "boolean") {
       defVal = "false";
@@ -194,6 +195,7 @@ function isDateType(val: any): string {
 function isNumberType(val: any): string {
   const t = getVarType(val);
   if (t === "number" && String(val).indexOf(".") !== -1) return "float";
+  if (t === "number" && Number(val)> 100000000) return "bigint"; // 特殊判断
   if (t === "number") return "int";
   if (t === "boolean") return "bool";
   return "";
