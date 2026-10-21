@@ -133,7 +133,7 @@ defineExpose({ getRef });
           />
         </el-form-item>
       </re-col>
-      <re-col :value="12" :xs="24" :sm="24">
+      <re-col :value="12" :xs="24" :sm="24" v-if="newFormInline.menuType === 0">
         <el-form-item label="路由名称" prop="name">
           <el-input
             v-model="newFormInline.name"

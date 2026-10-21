@@ -44,6 +44,7 @@ export const SYSTEM_USER_ADD = `/api/admin_plat/system-user/add`;
 export const SYSTEM_USER_EDIT = `/api/admin_plat/system-user/edit`;
 export const SYSTEM_USER_DEL = `/api/admin_plat/system-user/del`;
 export const SYSTEM_USER_ROLE_TREE = `/api/admin_plat/system-user/get-role-tree`;
+export const SYSTEM_USER_RESET_PWD = `/api/admin_plat/system-user/reset-password`;
 
 export const SYSTEM_MENU_PLAT_GET = `/api/admin_plat/system-menu/get-plat`;
 export const SYSTEM_MENU_PLAT_ADD = "/api/admin_plat/system-menu/add-plat"

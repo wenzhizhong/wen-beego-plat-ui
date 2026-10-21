@@ -23,4 +23,4 @@ tests/**/coverage/
 .vscode
 tsconfig.tsbuildinfo
 
-log*
+/log*

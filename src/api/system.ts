@@ -23,6 +23,7 @@ import { SYSTEM_UNIT_LIST,
   SYSTEM_USER_EDIT, 
   SYSTEM_USER_DEL, 
   SYSTEM_USER_ROLE_TREE,
+  SYSTEM_USER_RESET_PWD,
   SYSTEM_MENU_PLAT_GET,
   SYSTEM_MENU_PLAT_ADD ,
   SYSTEM_MENU_PLAT_EDIT ,
@@ -84,6 +85,13 @@ export const getRoleTree = (params?: object) => {
 export const getRoleIds = (data?: object) => {
   return http.request<Result>("post", "/list-role-ids", { data });
 };
+/** 系统管理-用户管理-重置密码 */
+export const resetPassword = (data?: object) => {
+  return http.request<Result>("post", SYSTEM_USER_RESET_PWD, { data });
+};
+
+
+
 
 /** 系统管理-角色管理列表 */
 export const getRoleList = (params?: object) => {
