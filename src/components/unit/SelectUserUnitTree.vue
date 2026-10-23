@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { shallowRef, reactive, ref, onMounted} from "vue";
+import { useNav } from "@/layout/hooks/useNav";
+import LaySidebarLeftCollapse from "@/layout/components/lay-sidebar/components/SidebarLeftCollapse.vue";
+import LaySidebarCenterCollapse from "@/layout/components/lay-sidebar/components/SidebarCenterCollapse.vue";
 import { getUserUnit } from "@/api/unit";
 import { getMenuMchntUnitTree } from "@/api/system";
 import { handleTree } from "@/utils/tree";
@@ -9,6 +12,15 @@ import {
   deviceDetection
 } from "@pureadmin/utils";
 import { nextTick } from "vue";
+
+const {
+  device,
+  pureApp,
+  isCollapse,
+  tooltipEffect,
+  menuSelect,
+  toggleSideBar
+} = useNav();
 
 const props = defineProps({
   apiType:{
@@ -32,6 +44,9 @@ const state = reactive({
   pid: [],
 })
 const treeData = shallowRef([]);
+const isShow = ref(false);
+const toggleSideBarOpened = ref(false);
+const toggleSideBarClass = ref("select-user-unit-tree-closed");
 
 const emit = defineEmits<{
   (e: 'closeCallback', data: null): void
@@ -43,6 +58,11 @@ defineOptions({
   isLoad:"isLoad"
 });
 
+onMounted(() => {
+  getUserUnit_();
+  console.log("device=", device)
+  console.log("device=" +device, device.value =='mobile')
+});
 
 /** 获取组织列表 */
 function getUserUnit_() { 
@@ -91,12 +111,14 @@ function onTreeSelect({ id, selected }) {
   props.onTreeSelect({ id, selected });
 }
 
-onMounted(() => {
-  getUserUnit_();
-});
+function toggleUnitTreeSideBar(){
+  toggleSideBarOpened.value = !toggleSideBarOpened.value
+   
+}
 
 </script>
 <template>
+  <div :class="'select-user-unit-tree '+ ( device === 'mobile' && !toggleSideBarOpened? toggleSideBarClass:'')">
     <tree
       ref="treeRef"
       placeholder="搜索组织单位"
@@ -106,22 +128,37 @@ onMounted(() => {
       :currentNodeKey="currentNodeKey"
       @tree-select="onTreeSelect"
     />
-</template>
+    
+    <LaySidebarCenterCollapse
+      v-if="device === 'mobile'"
+      :is-active="toggleSideBarOpened"
+      @toggleClick="toggleUnitTreeSideBar"
+    />
+  </div>
+</template> 
 
 <style lang="scss" scoped>
-.select-tree-item{
-  display: flex;
-  align-items: center;
-  .select-tree-logo{
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-    border-radius: 4px;
-  }
-  .select-tree-children-count{
-    box-sizing: border-box;
-    margin-left: auto;
-    padding-left: 50px;
+.select-user-unit-tree{
+  position: relative;
+  width: 100%;
+  transition: all 0.3s linear;
+  .select-tree-item{
+    display: flex;
+    align-items: center;
+    .select-tree-logo{
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+      border-radius: 4px;
+    }
+    .select-tree-children-count{
+      box-sizing: border-box;
+      margin-left: auto;
+      padding-left: 50px;
+    }
   }
 }
-</style>
+.select-user-unit-tree-closed{
+  width: 20px!important;
+} 
+</style> 
