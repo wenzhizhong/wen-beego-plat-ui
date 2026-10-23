@@ -11,7 +11,64 @@
         <el-input :model-value="genData?.table_name ?? ''" disabled />
       </el-form-item>
 
-      <el-form-item label="左侧菜单名称：">
+      <el-form-item label="一级菜单名称：">
+        <el-row :gutter="20" style="width: 100%;">
+          <el-col  :span="12">
+            <el-select  v-model="form.platParentId" placeholder="请选择平台系统一级菜单" filterable>
+              <el-option
+                v-for="item in firstLevelMenuOptions['admin_plat']"
+                :key="item.id"
+                :label="item.title"
+                :value="item.id"
+              />
+              <template #header>
+                <el-button type="primary" v-if="!isAddingFirstLevelMenu['admin_plat']" text bg size="small" @click="()=>{onAddOptionFirstLevelMenu('admin_plat')}">
+                  新增
+                </el-button>
+                <template v-else>
+                  <el-input
+                    v-model="optionNameFirstLevelMenu['admin_plat']"
+                    class="option-input"
+                    placeholder="新增一级菜单"
+                    size="small"
+                    style="width: 64%;"
+                  />&nbsp;
+                  <el-button type="primary" size="small" @click="()=>{onConfirmFirstLevelMenu('admin_plat')}">✔</el-button>
+                  <el-button size="small" @click="()=>{clearFirstLevelMenu('admin_plat')}">✖</el-button>
+                </template>
+              </template>
+            </el-select>
+          </el-col>
+          <el-col  :span="12">
+            <el-select  v-model="form.mchntParentId" placeholder="请选择商户系统一级菜单" filterable>
+              <el-option
+                v-for="item in firstLevelMenuOptions['admin_mchnt']"
+                :key="item.id"
+                :label="item.title"
+                :value="item.id"
+              />
+              <template #header>
+                <el-button type="primary" v-if="!isAddingFirstLevelMenu['admin_mchnt']" text bg size="small" @click="()=>{onAddOptionFirstLevelMenu('admin_mchnt')}">
+                  新增
+                </el-button>
+                <template v-else>
+                  <el-input
+                    v-model="optionNameFirstLevelMenu['admin_mchnt']"
+                    class="option-input"
+                    placeholder="新增一级菜单"
+                    size="small"
+                    style="width: 64%;"
+                  />&nbsp;
+                  <el-button type="primary" size="small" @click="()=>{onConfirmFirstLevelMenu('admin_mchnt')}">✔</el-button>
+                  <el-button size="small" @click="()=>{clearFirstLevelMenu('admin_mchnt')}">✖</el-button>
+                </template>
+              </template>
+            </el-select>
+            
+          </el-col>
+        </el-row>
+      </el-form-item>
+      <el-form-item label="二级菜单名称：">
         <el-input v-model="form.menuName" placeholder="请输入中文菜单名称" />
       </el-form-item>
 
@@ -80,6 +137,7 @@ import {
   getGenerateCodeRun,
   downloadCode
 } from "@/api/generate-code";
+import { string } from "vue-types";
 
 const props = defineProps<{
   modelValue: boolean;
@@ -93,6 +151,9 @@ const runLoading = ref(false);
 
 const viewTypeOptions = ref<{ label: string; value: string }[]>([]);
 const codeTypeOptions = ref<{ label: string; value: string }[]>([]);
+const firstLevelMenuOptions = ref<Object>({admin_plat:[], admin_mchnt: []});
+const isAddingFirstLevelMenu = ref<Object>({admin_plat:false, admin_mchnt: false})
+const optionNameFirstLevelMenu = ref<Object>({admin_plat:"", admin_mchnt: ""})
 
 const form = reactive({
   menuName: "",
@@ -101,7 +162,12 @@ const form = reactive({
   bizModule: "",
   tableGenerateCodeId: "",
   codeType: [] as string[],
-  viewType: ""
+  viewType: "",
+
+  platParentId: "",
+  mchntParentId: "",
+  lastPlatParentId: "",
+  lastMchntParentId: "",
 });
 
 const download = reactive({
@@ -124,8 +190,39 @@ watch(
   },
   { immediate: true }
 );
+watch(
+  ()=>form.appModules,
+  (val) => {
+    if (form.platParentId){
+      form.lastPlatParentId = form.platParentId
+    }
+    if (form.mchntParentId){
+      form.lastMchntParentId = form.mchntParentId
+    }
+
+    if (val && val.length > 0){
+      if(!val.includes('admin_plat')){
+        form.platParentId = ''
+      }else if(val.includes('admin_plat')){
+        form.platParentId = form.lastPlatParentId || ""
+      }
+      
+      if(!val.includes('admin_mchnt')){
+        form.mchntParentId = ''
+      }else if(val.includes('admin_mchnt')){
+        form.mchntParentId = form.lastMchntParentId || ""
+      }
+    }else{
+      form.platParentId = ''
+      form.mchntParentId = ''
+    }
+  },
+  { immediate: true }
+)
 
 function resetForm() {
+  form.platParentId = "";
+  form.mchntParentId = "";
   form.menuName = "";
   form.appModules = ["admin_plat"];
   form.menuModule = "system";
@@ -152,6 +249,8 @@ async function fetchParams() {
     const data = res.data ?? {};
     viewTypeOptions.value = mapToOptions(data.viewTypes ?? {});
     codeTypeOptions.value = mapToOptions(data.generateCodeTypes ?? {});
+    firstLevelMenuOptions.value['admin_plat'] = data.firstLevelPlatMenu ?? [];
+    firstLevelMenuOptions.value['admin_mchnt'] = data.firstLevelMchntMenu ?? [];
     form.viewType = viewTypeOptions.value[0]?.value ?? "element-plus";
   } catch (e) {
     console.error(e);
@@ -185,6 +284,8 @@ async function handleRun() {
   try {
     const res = await getGenerateCodeRun({
       tableGenerateCodeId: form.tableGenerateCodeId,
+      platParentId: form.platParentId,
+      mchntParentId: form.mchntParentId,
       menuName: form.menuName,
       appModules: form.appModules,
       menuModule: form.menuModule,
@@ -225,5 +326,32 @@ async function handleDownload() {
 function handleClose() {
   visible.value = false;
   emit("update:modelValue", false);
+}
+
+
+
+const onAddOptionFirstLevelMenu = (platform: string) => {
+  isAddingFirstLevelMenu.value[platform]= true
+}
+const onConfirmFirstLevelMenu = (platform: string) => {
+  let tmpVal = optionNameFirstLevelMenu.value[platform]
+  if (tmpVal) {
+    firstLevelMenuOptions.value[platform].unshift({
+      id: tmpVal,
+      title: tmpVal + '【新增】',
+    })
+    
+    if( platform == "admin_plat"){
+      form.platParentId = tmpVal
+    }else if(platform == "admin_mchnt"){
+      form.mchntParentId = tmpVal
+    }
+
+    clearFirstLevelMenu(platform)
+  }
+}
+const clearFirstLevelMenu = (platform: string) => {
+  optionNameFirstLevelMenu.value[platform] = ""
+  isAddingFirstLevelMenu.value[platform] = false
 }
 </script>
