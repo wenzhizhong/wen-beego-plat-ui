@@ -60,8 +60,6 @@ defineOptions({
 
 onMounted(() => {
   getUserUnit_();
-  console.log("device=", device)
-  console.log("device=" +device, device.value =='mobile')
 });
 
 /** 获取组织列表 */
@@ -140,7 +138,8 @@ function toggleUnitTreeSideBar(){
 <style lang="scss" scoped>
 .select-user-unit-tree{
   position: relative;
-  width: 100%;
+  z-index: 1000;
+  // width: 100%;
   transition: all 0.3s linear;
   .select-tree-item{
     display: flex;
@@ -159,6 +158,6 @@ function toggleUnitTreeSideBar(){
   }
 }
 .select-user-unit-tree-closed{
-  width: 20px!important;
+  width: 30px;
 } 
 </style> 

@@ -107,7 +107,7 @@ onMounted(() => {
       :defaultCheckedKeys="[default_unit_id]"
       :currentNodeKey="default_unit_id"
     />
-    <div >
+    <div class="main">
       <el-form
         ref="formRef"
         :inline="true"

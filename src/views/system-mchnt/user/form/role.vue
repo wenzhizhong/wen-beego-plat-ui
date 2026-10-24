@@ -17,12 +17,12 @@ const newFormInline = ref(props.formInline);
 <template>
   <el-form :model="newFormInline">
     <el-row :gutter="30">
-      <re-col>
+      <el-col>
         <el-form-item label="用户名称" prop="name">
           <el-input disabled v-model="newFormInline.name" />
         </el-form-item>
-      </re-col>
-      <re-col>
+      </el-col>
+      <el-col>
         <el-form-item label="角色列表" prop="ids">
           <el-select
             v-model="newFormInline.ids"
@@ -41,7 +41,7 @@ const newFormInline = ref(props.formInline);
             </el-option>
           </el-select>
         </el-form-item>
-      </re-col>
+      </el-col>
     </el-row>
   </el-form>
 </template>

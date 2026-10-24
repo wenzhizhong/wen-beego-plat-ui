@@ -78,20 +78,20 @@ defineExpose({
   >
   
     <el-row :gutter="30">
-      <re-col>
+      <el-col>
         <el-form-item label="组织单位"  prop="unit_id">
           <SelectUserUnitCascader :changed="handelSelectUserUnit" :modelValue="newFormInline.unit_id"  />
         </el-form-item>
-      </re-col>
+      </el-col>
     </el-row>
     <el-row :gutter="30">
-      <re-col>
+      <el-col>
         <el-form-item label="上级部门">
           <SelectDeptCascader  :changed="handelSelectUserUnitDept" :modelValueIsPid="true" :modelValue="newFormInline.id" :disableValue="[newFormInline.id]" :selectUnitIds="newFormInline.unit_id"></SelectDeptCascader>
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col :value="12" :xs="24" :sm="24">
+      <el-col :value="12" :xs="24" :sm="24">
         <el-form-item label="部门名称" prop="name">
           <el-input
             v-model="newFormInline.name"
@@ -99,8 +99,8 @@ defineExpose({
             placeholder="请输入部门名称"
           />
         </el-form-item>
-      </re-col>
-      <re-col :value="12" :xs="24" :sm="24">
+      </el-col>
+      <el-col :value="12" :xs="24" :sm="24">
         <el-form-item label="部门负责人">
           <el-input
             v-model="newFormInline.principal"
@@ -111,10 +111,10 @@ defineExpose({
           />
           <el-button type="primary" @click="principalShow = true">选择</el-button>
         </el-form-item>
-      </re-col>
+      </el-col>
 
 
-      <re-col :value="12" :xs="24" :sm="24">
+      <el-col :value="12" :xs="24" :sm="24">
         <el-form-item label="排序">
           <el-input-number
             v-model="newFormInline.sort"
@@ -124,8 +124,8 @@ defineExpose({
             controls-position="right"
           />
         </el-form-item>
-      </re-col>
-      <re-col :value="12" :xs="24" :sm="24">
+      </el-col>
+      <el-col :value="12" :xs="24" :sm="24">
         <el-form-item label="部门状态">
           <el-switch
             v-model="newFormInline.status"
@@ -137,9 +137,9 @@ defineExpose({
             :style="switchStyle"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col>
+      <el-col>
         <el-form-item label="备注">
           <el-input
             v-model="newFormInline.remark"
@@ -147,7 +147,7 @@ defineExpose({
             type="textarea"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
     </el-row>
 
     <SelectPrincipal :selectUnitIds="newFormInline.unit_id" :show="principalShow" :close="()=>{principalShow=false}" :callback="principalCallback" />

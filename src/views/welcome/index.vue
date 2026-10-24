@@ -29,7 +29,7 @@ const optionsBasis: Array<OptionsType> = [
 <template>
   <div>
     <el-row :gutter="24" justify="space-around">
-      <re-col
+      <el-col
         v-for="(item, index) in chartData"
         :key="index"
         v-motion
@@ -88,9 +88,9 @@ const optionsBasis: Array<OptionsType> = [
             <ChartRound v-else class="w-1/2!" />
           </div>
         </el-card>
-      </re-col>
+      </el-col>
 
-      <re-col
+      <el-col
         v-motion
         class="mb-[18px]"
         :value="18"
@@ -119,9 +119,9 @@ const optionsBasis: Array<OptionsType> = [
             />
           </div>
         </el-card>
-      </re-col>
+      </el-col>
 
-      <re-col
+      <el-col
         v-motion
         class="mb-[18px]"
         :value="6"
@@ -166,9 +166,9 @@ const optionsBasis: Array<OptionsType> = [
             </span>
           </div>
         </el-card>
-      </re-col>
+      </el-col>
 
-      <re-col
+      <el-col
         v-motion
         class="mb-[18px]"
         :value="18"
@@ -191,9 +191,9 @@ const optionsBasis: Array<OptionsType> = [
           </div>
           <WelcomeTable class="mt-3" />
         </el-card>
-      </re-col>
+      </el-col>
 
-      <re-col
+      <el-col
         v-motion
         class="mb-[18px]"
         :value="6"
@@ -241,7 +241,7 @@ const optionsBasis: Array<OptionsType> = [
             </el-timeline>
           </el-scrollbar>
         </el-card>
-      </re-col>
+      </el-col>
     </el-row>
   </div>
 </template>

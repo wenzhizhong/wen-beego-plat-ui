@@ -199,29 +199,29 @@ defineExpose({ getRef, handelSelectUserUnitDept });
     label-width="110px"
   >
     <el-row :gutter="30">
-      <re-col>
+      <el-col>
         <el-form-item label="组织单位"  prop="unit_id">
           <SelectUserUnitCascader :changed="handelSelectUserUnit" :modelValue="newFormInline.unit_id"  />
         </el-form-item>
-      </re-col>
+      </el-col>
     </el-row>
     <el-row :gutter="30">
-      <re-col >
+      <el-col >
         <el-form-item label="归属部门" prop="dept_id">
           <SelectDeptCascader  :changed="handelSelectUserUnitDept" :modelValue="newFormInline.dept_id" :selectUnitIds="newFormInline.unit_id"></SelectDeptCascader>
         </el-form-item>
-      </re-col>
+      </el-col>
     </el-row>
     <el-row :gutter="30">
-      <re-col >
+      <el-col >
         <el-form-item label="用户角色" prop="role_id">
           <SelectRoleCascader  :changed="handelSelectUserUnitRole" :modelValue="newFormInline.role_id.length>0 && newFormInline.role_id[newFormInline.role_id.length-1]" :selectUnitIds="newFormInline.unit_id"></SelectRoleCascader>
         </el-form-item>
-      </re-col>
+      </el-col>
     </el-row>
     
     <el-row :gutter="30">
-      <re-col >
+      <el-col >
         <el-form-item label="头像" prop="avatar">
           <sliceUploadV2 
             :bucketACL="'public'"
@@ -238,10 +238,10 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             </template>
           </sliceUploadV2>
         </el-form-item>
-      </re-col>
+      </el-col>
     </el-row>
     <el-row :gutter="30">
-      <re-col :value="12" :xs="24" :sm="24">
+      <el-col :value="12" :xs="24" :sm="24">
         <el-form-item label="用户名称" prop="name">
           <el-input
             v-model="newFormInline.name"
@@ -249,9 +249,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入用户名称"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col
+      <el-col
         v-if="newFormInline.title === '新增'"
         :value="12"
         :xs="24"
@@ -269,9 +269,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             </template>
           </el-input>
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24">
+      <el-col :value="12" :xs="24" :sm="24">
         <el-form-item label="手机号" prop="phone">
           <el-input
             v-model="newFormInline.phone"
@@ -280,9 +280,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             :readonly="newFormInline.id!=''"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col :value="12" :xs="24" :sm="24">
+      <el-col :value="12" :xs="24" :sm="24">
         <el-form-item label="邮箱" prop="email">
           <el-input
             v-model="newFormInline.email"
@@ -290,8 +290,8 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入邮箱"
           />
         </el-form-item>
-      </re-col>
-      <re-col :value="12" :xs="24" :sm="24">
+      </el-col>
+      <el-col :value="12" :xs="24" :sm="24">
         <el-form-item label="用户性别" prop="gender">
           <el-radio-group v-model="newFormInline.gender">
             <el-radio-button 
@@ -303,9 +303,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             </el-radio-button>
           </el-radio-group>
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col
+      <el-col
         v-if="newFormInline.title === '新增'"
         :value="12"
         :xs="24"
@@ -322,10 +322,10 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             :style="switchStyle"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
       
       
-      <re-col :value="24" :xs="24" :sm="24"> 
+      <el-col :value="24" :xs="24" :sm="24"> 
         <el-form-item label="注册渠道" prop="source">
           <el-radio-group v-model="newFormInline.source">
             <el-radio-button 
@@ -338,9 +338,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             </el-radio-button>
           </el-radio-group>
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="毕业院校" prop="graduated_from">
           <el-input
             v-model="newFormInline.graduated_from"
@@ -348,9 +348,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入毕业院校"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="学历" prop="schooling">
           <el-input
             v-model="newFormInline.schooling"
@@ -358,8 +358,8 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入学历"
           />
         </el-form-item>
-      </re-col>
-      <re-col :value="12" :xs="24" :sm="24"> 
+      </el-col>
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="学位编号" prop="degree_number">
           <el-input
             v-model="newFormInline.degree_number"
@@ -367,9 +367,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入学位编号"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="所学专业" prop="professional">
           <el-input
             v-model="newFormInline.professional"
@@ -377,9 +377,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入所学专业"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="职业" prop="occupation">
           <el-input
             v-model="newFormInline.occupation"
@@ -387,9 +387,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入职业"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24" v-if="false"> 
+      <el-col :value="12" :xs="24" :sm="24" v-if="false"> 
         <el-form-item label="所属公司名称" prop="company">
           <el-input
             v-model="newFormInline.company"
@@ -397,9 +397,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入所属公司名称"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="通讯地址" prop="address">
           <el-input
             v-model="newFormInline.address"
@@ -407,9 +407,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入通讯地址"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="紧急联系人姓名" prop="emergency_name">
           <el-input
             v-model="newFormInline.emergency_name"
@@ -417,9 +417,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入紧急联系人姓名"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="紧急联系人电话" prop="emergency_tel">
           <el-input
             v-model="newFormInline.emergency_tel"
@@ -427,9 +427,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入紧急联系人电话"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="24" :xs="24" :sm="24"> 
+      <el-col :value="24" :xs="24" :sm="24"> 
         <el-form-item label="证件类型" prop="card_type">
           <el-radio-group v-model="newFormInline.card_type">
             <el-radio-button 
@@ -441,9 +441,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             </el-radio-button>
           </el-radio-group>
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="证件照正面" prop="card_images">
           <sliceUploadV2 
             class="card-images-upload"
@@ -461,9 +461,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             </template>
           </sliceUploadV2>
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="证件照反面" prop="card_images">
           <sliceUploadV2 
             class="card-images-upload"
@@ -481,9 +481,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             </template>
           </sliceUploadV2>
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="证件号码" prop="card_num">
           <el-input
             v-model="newFormInline.card_num"
@@ -491,9 +491,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="请输入证件号码"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="身份证有效期" prop="card_valid_date">
           <el-date-picker
             v-model="card_valid_date"
@@ -506,9 +506,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
           >
           </el-date-picker>
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24"> 
+      <el-col :value="12" :xs="24" :sm="24"> 
         <el-form-item label="出生日期" prop="birth_date">
           <el-date-picker
             v-model="newFormInline.birth_date"
@@ -517,9 +517,9 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             value-format="YYYY-MM-DD"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
       
-      <re-col :value="12" :xs="24" :sm="24">
+      <el-col :value="12" :xs="24" :sm="24">
         <el-form-item label="星座" prop="constellation">
           <el-input
             v-model="newFormInline.constellation"
@@ -528,8 +528,8 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             placeholder="选择出生日期"
           />
         </el-form-item>
-      </re-col>
-      <re-col>
+      </el-col>
+      <el-col>
         <el-form-item label="备注" prop="remark">
           <el-input
             v-model="newFormInline.remark"
@@ -537,10 +537,10 @@ defineExpose({ getRef, handelSelectUserUnitDept });
             type="textarea"
           />
         </el-form-item>
-      </re-col>
-      <re-col>
+      </el-col>
+      <el-col>
         <font color="red">注：请填写正确的手机号，手机号后续维护由用户自己更新绑定</font>
-      </re-col>
+      </el-col>
     </el-row>
   </el-form>
 </template>

@@ -113,15 +113,15 @@ defineExpose({ getRef, handelSelectUserUnit });
     label-width="82px"
   >
     <el-row :gutter="30">
-      <re-col :value="20" :xs="24" :sm="24">
+      <el-col :value="20" :xs="24" :sm="24">
         <el-form-item label="上级" prop="pid">
           <!-- 请选择上级组织 -->
           <SelectUserUnitCascader :changed="handelSelectUserUnit" :modelValueIsPid="true" :modelValue="newFormInline.id" :disableValue="[newFormInline.id]"/>
         </el-form-item>
-      </re-col>
+      </el-col>
 
 
-      <re-col :value="20" :xs="24" :sm="24">
+      <el-col :value="20" :xs="24" :sm="24">
         <el-form-item label="Logo" prop="logo">
           <sliceUploadV2 
             :bucketACL="'public'"
@@ -139,9 +139,9 @@ defineExpose({ getRef, handelSelectUserUnit });
             </template>
           </sliceUploadV2>
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col :value="20" :xs="24" :sm="24">
+      <el-col :value="20" :xs="24" :sm="24">
         <el-form-item label="单位名称" prop="name">
           <el-input
             v-model="newFormInline.name"
@@ -149,9 +149,9 @@ defineExpose({ getRef, handelSelectUserUnit });
             placeholder="请输入单位名称"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col :value="20" :xs="24" :sm="24">
+      <el-col :value="20" :xs="24" :sm="24">
         <el-form-item label="机构代码" prop="code">
           <el-input
             v-model="newFormInline.code"
@@ -159,9 +159,9 @@ defineExpose({ getRef, handelSelectUserUnit });
             placeholder="请输入组织机构代码"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col :value="20" :xs="24" :sm="24">
+      <el-col :value="20" :xs="24" :sm="24">
         <el-form-item label="法人" prop="corporation">
           <el-input
             v-model="newFormInline.corporation"
@@ -169,9 +169,9 @@ defineExpose({ getRef, handelSelectUserUnit });
             placeholder="请输入法人姓名"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col :value="20" :xs="24" :sm="24">
+      <el-col :value="20" :xs="24" :sm="24">
         <el-form-item label="营业执照" prop="license">
           
           <sliceUploadV2 
@@ -188,10 +188,10 @@ defineExpose({ getRef, handelSelectUserUnit });
               </template>
           </sliceUploadV2>
         </el-form-item>
-      </re-col>
+      </el-col>
 
 
-      <re-col :value="20" :xs="24" :sm="24">
+      <el-col :value="20" :xs="24" :sm="24">
         <el-form-item label="排序" prop="address">
           <el-input
             v-model="newFormInline.sort"
@@ -200,9 +200,9 @@ defineExpose({ getRef, handelSelectUserUnit });
             placeholder="请输入排序"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col :value="20" :xs="24" :sm="24">
+      <el-col :value="20" :xs="24" :sm="24">
         <el-form-item label="地址" prop="address">
           <el-input
             v-model="newFormInline.address"
@@ -210,9 +210,9 @@ defineExpose({ getRef, handelSelectUserUnit });
             placeholder="请输入地址"
           />
         </el-form-item>
-      </re-col>
+      </el-col>
 
-      <re-col :value="20" :xs="24" :sm="24">
+      <el-col :value="20" :xs="24" :sm="24">
         <el-form-item label="状态" prop="status">
           <el-select
             v-model="newFormInline.status"
@@ -222,7 +222,7 @@ defineExpose({ getRef, handelSelectUserUnit });
             <el-option v-for="(item, index) in unit_status_map" :key="index" :value="Number(index)" :label="item" />
           </el-select>
         </el-form-item>
-      </re-col>
+      </el-col>
 
     </el-row>
   </el-form>
