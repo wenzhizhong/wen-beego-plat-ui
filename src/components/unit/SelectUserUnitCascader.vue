@@ -142,7 +142,7 @@ watch(
 
 </script>
 <template>
-    <el-cascader v-model="state.pid" :options="unitList" :props="props_" @change="handelSelectUserUnit" clearable filterable style="width: 100%;" >
+    <el-cascader v-model="state.pid" :options="unitList" :props="props_" :disabled="disabled" @change="handelSelectUserUnit" clearable filterable style="width: 100%;" >
       <template #default="{ node, data }">
         <div class="select-tree-item">
           <img :src="data.logoLink" alt="" class="select-tree-logo">
