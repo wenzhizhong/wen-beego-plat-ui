@@ -83,3 +83,14 @@ export const GENERATE_CODE_DEL = `/api/admin_plat/system-tools/generate-code/del
 export const GENERATE_CODE_GEN_PARAMS = `/api/admin_plat/system-tools/generate-code/get-gen-params`;
 export const GENERATE_CODE_RUN = `/api/admin_plat/system-tools/generate-code/run`;
 export const GENERATE_CODE_DOWNLOAD = `/api/admin_plat/system-tools/generate-code/download`;
+
+// sqlite-dms
+export const SQLITE_DMS_DATA_SOURCE_LIST = `/api/admin_plat/system-tools/sqlite-dms/data-source/list`;
+export const SQLITE_DMS_DATA_SOURCE_ALL = `/api/admin_plat/system-tools/sqlite-dms/data-source/all`;
+export const SQLITE_DMS_DATA_SOURCE_TEST = `/api/admin_plat/system-tools/sqlite-dms/data-source/test`;
+export const SQLITE_DMS_DATA_SOURCE_SAVE = `/api/admin_plat/system-tools/sqlite-dms/data-source/save`;
+export const SQLITE_DMS_DATA_SOURCE_DEL = `/api/admin_plat/system-tools/sqlite-dms/data-source/del`;
+export const SQLITE_DMS_TABLE_LIST = `/api/admin_plat/system-tools/sqlite-dms/table/list`;
+export const SQLITE_DMS_TABLE_SCHEMA = `/api/admin_plat/system-tools/sqlite-dms/table/schema`;
+export const SQLITE_DMS_TABLE_DATA = `/api/admin_plat/system-tools/sqlite-dms/table/data`;
+export const SQLITE_DMS_EXECUTE = `/api/admin_plat/system-tools/sqlite-dms/execute`;
